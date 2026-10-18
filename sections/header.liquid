@@ -1,0 +1,51 @@
+<header class="hdr">
+  <div class="wrap hdr-inner">
+    <a href="{{ routes.root_url }}" class="brand" aria-label="{{ shop.name | escape }}">
+      {% render 'logo', header_mark: true %}
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle-{{ section.id }}" aria-label="{{ section.settings.menu_open_label }}"
+            aria-expanded="false" aria-controls="nav-{{ section.id }}">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+  </div>
+</header>
+
+{%- comment -%}
+  The nav lives OUTSIDE .hdr: the header carries transform / will-change /
+  backdrop-filter, any of which makes it the containing block for a
+  position:fixed descendant and would clamp the overlay to its own height.
+{%- endcomment -%}
+<nav class="nav" id="nav-{{ section.id }}">
+  <button class="nav-close" id="nav-close-{{ section.id }}" aria-label="{{ section.settings.menu_close_label }}">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <span class="nav-brand">{% render 'logo', header_mark: true %}</span>
+
+  {%- for link in section.settings.menu.links -%}
+    <a href="{{ link.url }}">{{ link.title }}</a>
+  {%- endfor -%}
+
+  {%- if section.settings.cta_label != blank -%}
+    <a href="{{ section.settings.cta_url }}" class="btn btn--primary"
+       {% if section.settings.cta_external %}target="_blank" rel="noopener"{% endif %}>
+      {{ section.settings.cta_label }}
+    </a>
+  {%- endif -%}
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "header", "content": "Butang menu" },
+    { "type": "text", "id": "cta_label", "label": "Label butang", "default": "WhatsApp" },
+    { "type": "url", "id": "cta_url", "label": "Pautan butang" },
+    { "type": "checkbox", "id": "cta_external", "label": "Buka dalam tab baharu", "default": true },
+    { "type": "header", "content": "Label menu" },
+    { "type": "text", "id": "menu_open_label", "label": "Label aria butang buka menu", "default": "Buka menu" },
+    { "type": "text", "id": "menu_close_label", "label": "Label aria butang tutup menu", "default": "Tutup menu" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,71 @@
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-top">
+      <div class="ftr-brand">
+        {% render 'logo' %}
+        <p>{{ section.settings.tagline }}</p>
+      </div>
+
+      <div class="ftr-col">
+        <div class="ftr-col-title">{{ section.settings.col1_title }}</div>
+        <div class="ftr-links">
+          {%- for link in section.settings.col1_menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="ftr-col">
+        <div class="ftr-col-title">{{ section.settings.col2_title }}</div>
+        <div class="ftr-links">
+          {%- for link in section.settings.col2_menu.links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="ftr-col">
+        <div class="ftr-col-title">{{ section.settings.col3_title }}</div>
+        <div class="ftr-links">
+          {%- if settings.whatsapp_number != blank -%}
+            <a href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '-' | remove: '+' }}" target="_blank" rel="noopener">{{ settings.whatsapp_number }}</a>
+          {%- endif -%}
+          {%- if section.settings.hours != blank -%}<span>{{ section.settings.hours }}</span>{%- endif -%}
+          {%- if section.settings.area != blank -%}<span>{{ section.settings.area }}</span>{%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="ftr-note">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+
+    <div class="ftr-base">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.rights }}</span>
+      {%- if section.settings.made_in != blank -%}<span>{{ section.settings.made_in }}</span>{%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "tagline", "label": "Tagline", "default": "Custom insoles dibuat mengikut bentuk kaki anda. Order dari rumah, kami uruskan selebihnya." },
+    { "type": "header", "content": "Kolum 1" },
+    { "type": "text", "id": "col1_title", "label": "Tajuk", "default": "Laman" },
+    { "type": "link_list", "id": "col1_menu", "label": "Menu", "default": "main-menu" },
+    { "type": "header", "content": "Kolum 2" },
+    { "type": "text", "id": "col2_title", "label": "Tajuk", "default": "Bantuan" },
+    { "type": "link_list", "id": "col2_menu", "label": "Menu", "default": "footer" },
+    { "type": "header", "content": "Kolum 3" },
+    { "type": "text", "id": "col3_title", "label": "Tajuk", "default": "Hubungi" },
+    { "type": "text", "id": "hours", "label": "Waktu operasi", "default": "Isnin–Jumaat, 9am–6pm" },
+    { "type": "text", "id": "area", "label": "Kawasan", "default": "Seluruh Malaysia" },
+    { "type": "header", "content": "Nota" },
+    { "type": "textarea", "id": "disclaimer", "label": "Penafian", "default": "InsoLab custom insoles adalah produk untuk keselesaan, sokongan dan fesyen custom. Produk ini tidak bertujuan untuk mendiagnosis, merawat, menyembuhkan atau mencegah apa-apa penyakit. Untuk masalah kesihatan kaki, sila rujuk pakar perubatan." },
+    { "type": "text", "id": "rights", "label": "Hak cipta", "default": "Hak cipta terpelihara." },
+    { "type": "text", "id": "made_in", "label": "Dibuat di", "default": "Dibuat di Malaysia" }
+  ]
+}
+{% endschema %}

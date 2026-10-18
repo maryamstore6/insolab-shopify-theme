@@ -1,0 +1,103 @@
+<section class="section">
+  <div class="wrap">
+    {%- assign heading = section.settings.heading | default: collection.title -%}
+    <div class="section-head" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1>{{ heading }}</h1>
+      {%- if section.settings.show_description and collection.description != blank -%}
+        <div class="rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      {%- if collection.products.size > 0 -%}
+        <div class="product-grid" data-reveal-group>
+          {%- for product in collection.products -%}
+            <article class="product-card" data-reveal>
+              <div class="product-media">
+                <a href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+                  {%- if product.featured_image -%}
+                    <img src="{{ product.featured_image | image_url: width: 640 }}"
+                         srcset="{{ product.featured_image | image_url: width: 320 }} 320w,
+                                 {{ product.featured_image | image_url: width: 640 }} 640w,
+                                 {{ product.featured_image | image_url: width: 960 }} 960w"
+                         sizes="(max-width: 900px) 92vw, 40vw"
+                         alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                         class="product-art" width="640" height="640"
+                         loading="lazy" decoding="async">
+                  {%- else -%}
+                    <img src="{{ 'insole-support.svg' | asset_url }}"
+                         alt="{{ product.title | escape }}"
+                         class="product-art" width="320" height="660" loading="lazy">
+                  {%- endif -%}
+                </a>
+              </div>
+
+              <div class="product-body">
+                {%- unless product.available -%}
+                  <span class="product-badge">{{ section.settings.sold_out_text }}</span>
+                {%- endunless -%}
+
+                <h2 class="product-name"><a href="{{ product.url }}">{{ product.title }}</a></h2>
+
+                {%- if product.description != blank -%}
+                  <p class="product-desc">{{ product.description | strip_html | truncate: 140 }}</p>
+                {%- endif -%}
+
+                <div class="product-foot">
+                  <div class="product-price">
+                    {%- if product.compare_at_price > product.price -%}
+                      <s>{{ product.compare_at_price | money }}</s>
+                    {%- endif -%}
+                    {{ product.price | money }}
+                  </div>
+                  <a class="btn btn--primary" href="{{ product.url }}">{{ section.settings.view_label }}</a>
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="hero-actions" style="margin-top:var(--s-4)"
+               aria-label="{{ section.settings.pagination_label }}">
+            {%- if paginate.previous -%}
+              <a class="btn btn--ghost" href="{{ paginate.previous.url }}">{{ section.settings.prev_label }}</a>
+            {%- endif -%}
+            <span class="product-desc">{{ section.settings.page_label }} {{ paginate.current_page }} / {{ paginate.pages }}</span>
+            {%- if paginate.next -%}
+              <a class="btn btn--ghost" href="{{ paginate.next.url }}">{{ section.settings.next_label }}</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <p class="lead" role="status">{{ section.settings.empty_text }}</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Koleksi",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Koleksi" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "info": "Biarkan kosong untuk guna tajuk koleksi." },
+    { "type": "checkbox", "id": "show_description", "label": "Tunjuk penerangan koleksi", "default": true },
+    { "type": "range", "id": "products_per_page", "label": "Produk per halaman", "min": 8, "max": 24, "step": 4, "default": 12 },
+    { "type": "text", "id": "empty_text", "label": "Teks koleksi kosong", "default": "Tiada produk dalam koleksi ini lagi." },
+    { "type": "text", "id": "sold_out_text", "label": "Teks habis stok", "default": "Habis" },
+    { "type": "text", "id": "view_label", "label": "Label butang produk", "default": "Lihat" },
+    { "type": "header", "content": "Navigasi halaman" },
+    { "type": "text", "id": "pagination_label", "label": "Label navigasi (pembaca skrin)", "default": "Navigasi halaman" },
+    { "type": "text", "id": "prev_label", "label": "Label butang sebelum", "default": "Sebelum" },
+    { "type": "text", "id": "next_label", "label": "Label butang seterusnya", "default": "Seterusnya" },
+    { "type": "text", "id": "page_label", "label": "Label nombor halaman", "default": "Halaman" }
+  ],
+  "presets": [
+    { "name": "Koleksi" }
+  ]
+}
+{% endschema %}

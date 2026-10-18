@@ -1,0 +1,157 @@
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    {%- if section.settings.bg_image != blank -%}
+      <img src="{{ section.settings.bg_image | image_url: width: 2400 }}"
+           srcset="{{ section.settings.bg_image | image_url: width: 800 }} 800w,
+                   {{ section.settings.bg_image | image_url: width: 1400 }} 1400w,
+                   {{ section.settings.bg_image | image_url: width: 2000 }} 2000w,
+                   {{ section.settings.bg_image | image_url: width: 2400 }} 2400w"
+           sizes="100vw" alt="" class="hero-bg-img"
+           width="{{ section.settings.bg_image.width }}"
+           height="{{ section.settings.bg_image.height }}"
+           loading="eager" fetchpriority="high" aria-hidden="true">
+    {%- else -%}
+      {%- comment -%}
+        Bundled hero fallback. The WebP <source> wins on every browser that
+        supports it (all modern ones) and is picked by viewport width; the
+        <img> is the JPEG fallback for anything older. No media queries, so a
+        desktop browser never downloads the mobile crop and vice versa.
+      {%- endcomment -%}
+      <picture>
+        <source type="image/webp"
+                sizes="100vw"
+                srcset="{{ 'hero-product-mobile.webp' | asset_url }} 768w,
+                        {{ 'hero-product-tablet.webp' | asset_url }} 1200w,
+                        {{ 'hero-product-desktop.webp' | asset_url }} 2400w">
+        <img src="{{ 'hero-product-desktop.jpg' | asset_url }}"
+             srcset="{{ 'hero-product-mobile.jpg' | asset_url }} 768w,
+                     {{ 'hero-product-tablet.jpg' | asset_url }} 1200w,
+                     {{ 'hero-product-desktop.jpg' | asset_url }} 2400w"
+             sizes="100vw"
+             alt="" class="hero-bg-img" width="2400" height="1350"
+             loading="eager" fetchpriority="high" aria-hidden="true">
+      </picture>
+    {%- endif -%}
+    <div class="hero-bg-overlay"></div>
+  </div>
+  <div class="hero-bloom hero-bloom--1" aria-hidden="true"></div>
+  <div class="hero-bloom hero-bloom--2" aria-hidden="true"></div>
+  <div class="hero-bloom hero-bloom--3" aria-hidden="true"></div>
+  <div class="hero-shaft" aria-hidden="true"></div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      <h1 class="hero-title">
+        <span class="line-mask"><span class="line-inner">{{ section.settings.heading }}</span></span>
+        {%- if section.settings.heading_accent != blank -%}
+          <span class="line-mask"><span class="line-inner"><em>{{ section.settings.heading_accent }}</em></span></span>
+        {%- endif -%}
+      </h1>
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero-sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      <div class="hero-actions">
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_url | default: '#products' }}" class="btn btn--primary btn--lg">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}
+          <a href="{{ section.settings.cta2_url | default: '#process' }}" class="btn btn--ghost btn--lg">{{ section.settings.cta2_label }}</a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="hero-meta">
+          {%- for block in section.blocks -%}
+            <div class="hero-meta-item" {{ block.shopify_attributes }}>
+              <div class="hero-meta-num">{{ block.settings.number }}<sup>{{ block.settings.unit }}</sup></div>
+              <div class="hero-meta-label">{{ block.settings.label }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="hero-visual">
+      {%- if section.settings.visual_image != blank -%}
+        <img src="{{ section.settings.visual_image | image_url: width: 1024 }}"
+             srcset="{{ section.settings.visual_image | image_url: width: 420 }} 420w,
+                     {{ section.settings.visual_image | image_url: width: 640 }} 640w,
+                     {{ section.settings.visual_image | image_url: width: 820 }} 820w,
+                     {{ section.settings.visual_image | image_url: width: 1024 }} 1024w"
+             sizes="(max-width: 1400px) 46vw, 620px"
+             alt="{{ section.settings.visual_alt | escape }}"
+             class="hero-visual-img"
+             width="{{ section.settings.visual_image.width }}"
+             height="{{ section.settings.visual_image.height }}"
+             fetchpriority="high" decoding="async">
+      {%- else -%}
+        <picture>
+          <source media="(max-width: 760px)"
+                  srcset="{{ 'hero-insole-kit-420.webp' | asset_url }} 420w, {{ 'hero-insole-kit-640.webp' | asset_url }} 640w"
+                  sizes="92vw" type="image/webp">
+          <source srcset="{{ 'hero-insole-kit-420.webp' | asset_url }} 420w, {{ 'hero-insole-kit-640.webp' | asset_url }} 640w, {{ 'hero-insole-kit-820.webp' | asset_url }} 820w, {{ 'hero-insole-kit-1024.webp' | asset_url }} 1024w"
+                  sizes="(max-width: 1400px) 46vw, 620px" type="image/webp">
+          <img src="{{ 'hero-insole-kit-820.jpg' | asset_url }}"
+               srcset="{{ 'hero-insole-kit-420.jpg' | asset_url }} 420w, {{ 'hero-insole-kit-640.jpg' | asset_url }} 640w, {{ 'hero-insole-kit-820.jpg' | asset_url }} 820w, {{ 'hero-insole-kit-1024.jpg' | asset_url }} 1024w"
+               sizes="(max-width: 1400px) 46vw, 620px"
+               alt="{{ section.settings.visual_alt | escape }}"
+               class="hero-visual-img" width="1024" height="1024"
+               fetchpriority="high" decoding="async">
+        </picture>
+      {%- endif -%}
+      {%- if section.settings.visual_caption != blank -%}
+        <p class="hero-visual-caption">{{ section.settings.visual_caption }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_scroll_hint -%}
+  <div class="scroll-hint" aria-hidden="true">
+    <span>{{ section.settings.scroll_hint }}</span>
+    <span class="scroll-hint-line"></span>
+  </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Custom Insoles Specialist · Malaysia" },
+    { "type": "text", "id": "heading", "label": "Tajuk baris 1", "default": "Pakar Custom Insoles." },
+    { "type": "text", "id": "heading_accent", "label": "Tajuk baris 2 (warna accent)", "default": "Khas Untuk Anda." },
+    { "type": "textarea", "id": "subheading", "label": "Subtajuk", "default": "Setiap pasang dibuat mengikut bentuk kaki anda sendiri. Order dari rumah, kami uruskan selebihnya." },
+    { "type": "text", "id": "cta_label", "label": "Butang utama", "default": "Order Sekarang — RM599" },
+    { "type": "url", "id": "cta_url", "label": "Pautan butang utama" },
+    { "type": "text", "id": "cta2_label", "label": "Butang kedua", "default": "Cara Ia Berfungsi" },
+    { "type": "url", "id": "cta2_url", "label": "Pautan butang kedua" },
+    { "type": "header", "content": "Gambar" },
+    { "type": "image_picker", "id": "bg_image", "label": "Latar belakang (pilihan)" },
+    { "type": "image_picker", "id": "visual_image", "label": "Gambar produk (pilihan)" },
+    { "type": "text", "id": "visual_alt", "label": "Alt gambar produk", "default": "InsoLab — insole custom dengan zon sokongan dan kit acuan kaki" },
+    { "type": "text", "id": "visual_caption", "label": "Kapsyen gambar", "default": "Custom Insole — Zon Sokongan" },
+    { "type": "header", "content": "Petunjuk skrol" },
+    { "type": "checkbox", "id": "show_scroll_hint", "label": "Tunjuk petunjuk skrol", "default": true },
+    { "type": "text", "id": "scroll_hint", "label": "Teks petunjuk skrol", "default": "Scroll" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistik",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Nombor", "default": "100" },
+        { "type": "text", "id": "unit", "label": "Unit", "default": "hari" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Jaminan" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

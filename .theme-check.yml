@@ -1,0 +1,34 @@
+# Shopify Theme Check configuration.
+# Run:  shopify theme check
+# Docs: https://shopify.dev/docs/storefronts/themes/tools/theme-check
+extends: theme-check:recommended
+
+TemplateLength:
+  enabled: true
+  max_length: 200
+
+# Sections are intentionally text-driven for this brand; the copy lives in
+# section settings so the merchant edits it in the theme editor.
+ImgLazyLoading:
+  enabled: true
+
+# The theme ships vendored JS libs (gsap / ScrollTrigger / lenis) on purpose,
+# so remote-asset rules would only produce noise here.
+RemoteAsset:
+  enabled: false
+
+ParserBlockingScript:
+  enabled: true
+
+# Merchant-facing copy is Malay; the translatable-string rule expects the
+# locales file for every string. We keep copy in section schemas instead.
+TranslationKeyExists:
+  enabled: false
+
+# Nested blocks (a block that contains its own blocks) are valid Shopify -
+# see https://shopify.dev/docs/themes/architecture/blocks/theme-blocks/schema#blocks
+# The section schema in Shopify's own CLI allows them, but theme-check 2.2.2
+# mis-evaluates the allOf discriminated union and reports
+# "Property blocks is not allowed". Disabled until the bundled version catches up.
+ValidSchema:
+  enabled: false

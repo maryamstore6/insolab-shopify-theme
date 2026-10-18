@@ -1,0 +1,28 @@
+{
+  "current": {
+    "color_ink": "#0B3D91",
+    "color_accent": "#00B3B8",
+    "color_accent_deep": "#00777C",
+    "color_accent_soft": "#E8F4F4",
+    "color_paper": "#F5F3EE",
+    "font_display": "Playfair Display",
+    "font_body": "Source Sans 3",
+    "whatsapp_number": "60176055349",
+    "whatsapp_label": "WhatsApp",
+    "whatsapp_display": "017-605 5349"
+  },
+  "presets": {
+    "InsoLab Cinematic": {
+      "color_ink": "#0B3D91",
+      "color_accent": "#00B3B8",
+      "color_accent_deep": "#00777C",
+      "color_accent_soft": "#E8F4F4",
+      "color_paper": "#F5F3EE",
+      "font_display": "Playfair Display",
+      "font_body": "Source Sans 3",
+      "whatsapp_number": "60176055349",
+      "whatsapp_label": "WhatsApp",
+      "whatsapp_display": "017-605 5349"
+    }
+  }
+}

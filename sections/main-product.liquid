@@ -1,0 +1,262 @@
+<section class="section" id="order-{{ section.id }}">
+  <div class="wrap">
+    {%- comment -%}
+      Every id is namespaced with section.id: the merchant can add this
+      section more than once without duplicate ids, and the buy box always
+      resolves its OWN form rather than the first one on the page.
+    {%- endcomment -%}
+    {%- assign form_id = 'order-form-' | append: section.id -%}
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1 class="section-head-title">{{ section.settings.heading }}</h1>
+    </div>
+
+    <div class="split split--buybox" style="align-items:start"
+           data-order-section="{{ section.id }}"
+           data-unit-price="{{ product.selected_or_first_available_variant.price | divided_by: 100.0 }}">
+
+      {%- comment -%}
+        REAL Shopify product form. Replaces the static page's client-side
+        order form: this posts to /cart/add and then hands off to Shopify
+        checkout, so orders, inventory, tax and confirmation emails all
+        come from Shopify rather than a DOM swap.
+      {%- endcomment -%}
+      {% form 'product', product, id: form_id, class: 'order-form' %}
+        <input type="hidden" name="id" id="variant-id-{{ section.id }}" value="{{ product.selected_or_first_available_variant.id }}">
+
+        {%- unless product.has_only_default_variant -%}
+          <div class="form-row">
+            <label class="form-label" for="variant-select-{{ section.id }}">{{ section.settings.variant_label }}</label>
+            <select class="form-input" id="variant-select-{{ section.id }}" name="variant">
+              {%- for variant in product.variants -%}
+                <option value="{{ variant.id }}"
+                        data-price="{{ variant.price | divided_by: 100.0 }}"
+                        {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                        {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }} &mdash; {{ variant.price | money }}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endunless -%}
+
+        {%- if section.settings.show_customer_fields -%}
+          <div class="form-row">
+            <label class="form-label" for="f-name-{{ section.id }}">{{ section.settings.name_label }}</label>
+            <input class="form-input" id="f-name-{{ section.id }}" name="attributes[Nama]" type="text"
+                   placeholder="{{ section.settings.name_placeholder }}" autocomplete="name" required>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-row">
+              <label class="form-label" for="f-phone-{{ section.id }}">{{ section.settings.phone_label }}</label>
+              <input class="form-input" id="f-phone-{{ section.id }}" name="attributes[Telefon]" type="tel"
+                     placeholder="{{ section.settings.phone_placeholder }}" autocomplete="tel" required>
+            </div>
+            <div class="form-row">
+              <label class="form-label" for="f-email-{{ section.id }}">{{ section.settings.email_label }}</label>
+              <input class="form-input" id="f-email-{{ section.id }}" name="attributes[Email]" type="email"
+                     placeholder="{{ section.settings.email_placeholder }}" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="f-addr-{{ section.id }}">{{ section.settings.addr_label }}</label>
+            <input class="form-input" id="f-addr-{{ section.id }}" name="attributes[Alamat]" type="text"
+                   placeholder="{{ section.settings.addr_placeholder }}" autocomplete="street-address" required>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-row">
+              <label class="form-label" for="f-city-{{ section.id }}">{{ section.settings.city_label }}</label>
+              <input class="form-input" id="f-city-{{ section.id }}" name="attributes[Bandar]" type="text"
+                     placeholder="{{ section.settings.city_placeholder }}" autocomplete="address-level2" required>
+            </div>
+            <div class="form-row">
+              <label class="form-label" for="f-state-{{ section.id }}">{{ section.settings.state_label }}</label>
+              <input class="form-input" id="f-state-{{ section.id }}" name="attributes[Negeri]" type="text"
+                     placeholder="{{ section.settings.state_placeholder }}" autocomplete="address-level1" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-row">
+              <label class="form-label" for="f-post-{{ section.id }}">{{ section.settings.post_label }}</label>
+              <input class="form-input" id="f-post-{{ section.id }}" name="attributes[Poskod]" type="text"
+                     placeholder="{{ section.settings.post_placeholder }}" autocomplete="postal-code" required>
+            </div>
+            <div class="form-row">
+              <label class="form-label" for="f-notes-{{ section.id }}">{{ section.settings.notes_label }}</label>
+              <input class="form-input" id="f-notes-{{ section.id }}" name="attributes[Nota]" type="text"
+                     placeholder="{{ section.settings.notes_placeholder }}">
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.note != blank -%}
+          <p class="form-note">{{ section.settings.note }}</p>
+        {%- endif -%}
+      {% endform %}
+
+      {%- comment -%} Buy box: what you get, then the package, then the price {%- endcomment -%}
+      <div class="buybox" data-reveal>
+        <div class="buybox-trust">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'trust' -%}
+              <span {{ block.shopify_attributes }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                {{ block.settings.text }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <ul class="buybox-benefits">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'benefit' -%}
+              <li {{ block.shopify_attributes }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        <div class="buybox-head">
+          <div class="buybox-title">{{ section.settings.picker_title }}</div>
+          <p class="buybox-sub">{{ section.settings.picker_sub }}</p>
+        </div>
+
+        <div class="pick-list">
+          {%- assign pick = section.settings.pick_collection -%}
+          {%- if collections[pick] != blank -%}
+            {%- for p in collections[pick].products -%}
+              <button type="button" class="pick{% if forloop.index == section.settings.pick_default %} is-picked{% endif %}"
+                      data-variant="{{ p.selected_or_first_available_variant.id }}"
+                      data-price="{{ p.selected_or_first_available_variant.price | divided_by: 100.0 }}">
+                {%- if p.tags contains 'best-value' -%}
+                  <span class="pick-badge">{{ section.settings.badge_text }}</span>
+                {%- endif -%}
+                <span class="pick-top">
+                  <span class="pick-name">{{ p.title }}</span>
+                  <span class="pick-price">
+                    {%- if p.compare_at_price > p.price -%}<s>{{ p.compare_at_price | money }}</s>{%- endif -%}
+                    {{ p.price | money }}
+                  </span>
+                </span>
+                <span class="pick-meta">{{ p.description | strip_html | truncate: 60 }}</span>
+              </button>
+            {%- endfor -%}
+          {%- else -%}
+            <p class="buybox-sub">{{ section.settings.no_collection_text }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="qty-row">
+          <span class="qty-label">{{ section.settings.qty_label }}</span>
+          <div class="qty-stepper">
+            <button type="button" id="qty-minus-{{ section.id }}" aria-label="{{ section.settings.qty_minus_label }}">&minus;</button>
+            <span id="qty-value-{{ section.id }}" aria-live="polite">1</span>
+            <button type="button" id="qty-plus-{{ section.id }}" aria-label="{{ section.settings.qty_plus_label }}">+</button>
+          </div>
+        </div>
+
+        <button type="submit" form="{{ form_id }}" class="btn btn--primary btn--lg btn--block buybox-cta">
+          {{ section.settings.cta_label }} — <span id="cta-total-{{ section.id }}">{{ product.price | money }}</span>
+        </button>
+
+        {%- if section.settings.ship_note != blank -%}
+          <div class="buybox-ship">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+            <span>{{ section.settings.ship_note }}</span>
+          </div>
+        {%- endif -%}
+
+        <div class="buybox-urgency">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          {{ section.settings.urgency }}
+        </div>
+
+        <div class="buybox-secure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          {{ section.settings.secure }}
+        </div>
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'quote' -%}
+            <figure class="buybox-quote" {{ block.shopify_attributes }}>
+              <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+              <blockquote>{{ block.settings.quote }}</blockquote>
+              <figcaption>
+                <span class="buybox-quote-avatar" aria-hidden="true">{{ block.settings.name | slice: 0, 1 }}</span>
+                <span>
+                  <strong>{{ block.settings.name }}</strong>
+                  <small>{{ block.settings.role }}</small>
+                </span>
+              </figcaption>
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Borang pesanan + buy box",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Order" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "default": "Mula dengan impression kit." },
+    { "type": "header", "content": "Borang" },
+    { "type": "text", "id": "variant_label", "label": "Label pilihan varian", "default": "Pilih pakej" },
+    { "type": "checkbox", "id": "show_customer_fields", "label": "Tunjuk medan pelanggan", "default": true },
+    { "type": "text", "id": "name_label", "label": "Label nama", "default": "Nama Penuh *" },
+    { "type": "text", "id": "phone_label", "label": "Label telefon", "default": "No. Telefon *" },
+    { "type": "text", "id": "name_placeholder", "label": "Placeholder nama", "default": "Seperti dalam kad pengenalan" },
+    { "type": "text", "id": "phone_placeholder", "label": "Placeholder telefon", "default": "01X-XXX XXXX" },
+    { "type": "text", "id": "email_label", "label": "Label email", "default": "Email" },
+    { "type": "text", "id": "email_placeholder", "label": "Placeholder email", "default": "nama@email.com" },
+    { "type": "text", "id": "addr_label", "label": "Label alamat", "default": "Alamat Penghantaran" },
+    { "type": "text", "id": "addr_placeholder", "label": "Placeholder alamat", "default": "No. rumah, jalan" },
+    { "type": "text", "id": "city_label", "label": "Label bandar", "default": "Bandar" },
+    { "type": "text", "id": "city_placeholder", "label": "Placeholder bandar", "default": "Bandar" },
+    { "type": "text", "id": "state_label", "label": "Label negeri", "default": "Negeri" },
+    { "type": "text", "id": "state_placeholder", "label": "Placeholder negeri", "default": "Negeri" },
+    { "type": "text", "id": "post_label", "label": "Label poskod", "default": "Poskod" },
+    { "type": "text", "id": "post_placeholder", "label": "Placeholder poskod", "default": "XXXXX" },
+    { "type": "text", "id": "notes_label", "label": "Label nota", "default": "Nota (pilihan)" },
+    { "type": "text", "id": "notes_placeholder", "label": "Placeholder nota", "default": "Ada apa-apa kami perlu tahu?" },
+    { "type": "textarea", "id": "note", "label": "Nota bawah borang", "default": "Dengan membuat pesanan, anda bersetuju dengan terma kami. InsoLab custom insoles adalah produk untuk keselesaan dan sokongan — bukan alat perubatan." },
+    { "type": "header", "content": "Buy box" },
+    { "type": "text", "id": "picker_title", "label": "Tajuk pemilih", "default": "Pilih Pakej Anda" },
+    { "type": "text", "id": "picker_sub", "label": "Subtajuk pemilih", "default": "Makin banyak, makin jimat." },
+    { "type": "collection", "id": "pick_collection", "label": "Koleksi pakej" },
+    { "type": "range", "id": "pick_default", "label": "Pakej dipilih (nombor)", "min": 1, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "badge_text", "label": "Teks badge", "default": "PALING JIMAT" },
+    { "type": "text", "id": "no_collection_text", "label": "Teks bila tiada koleksi", "default": "Pilih koleksi pakej dalam tetapan seksyen ini." },
+    { "type": "text", "id": "qty_label", "label": "Label kuantiti", "default": "Kuantiti" },
+    { "type": "text", "id": "qty_minus_label", "label": "Label butang kurang (pembaca skrin)", "default": "Kurangkan kuantiti" },
+    { "type": "text", "id": "qty_plus_label", "label": "Label butang tambah (pembaca skrin)", "default": "Tambah kuantiti" },
+    { "type": "text", "id": "cta_label", "label": "Label butang", "default": "Tambah ke Troli" },
+    { "type": "textarea", "id": "ship_note", "label": "Nota penghantaran", "default": "Penghantaran percuma — kami tanggung kos pos kit dan penghantaran balik" },
+    { "type": "text", "id": "urgency", "label": "Baris segera", "default": "Kit dipos dalam 2–3 hari kerja" },
+    { "type": "text", "id": "secure", "label": "Baris keselamatan", "default": "Pembayaran selamat melalui Shopify" }
+  ],
+  "blocks": [
+    { "type": "trust", "name": "Trust item", "settings": [
+      { "type": "text", "id": "text", "label": "Teks", "default": "100 Hari Jaminan" }
+    ]},
+    { "type": "benefit", "name": "Benefit", "settings": [
+      { "type": "text", "id": "text", "label": "Teks", "default": "Dibuat ikut acuan kaki anda sendiri" }
+    ]},
+    { "type": "quote", "name": "Testimoni", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Petikan", "default": "Kerja saya berdiri 8 jam sehari. Lepas pakai ni, kaki tak penat macam dulu." },
+      { "type": "text", "id": "name", "label": "Nama", "default": "Ahmad R." },
+      { "type": "text", "id": "role", "label": "Peranan", "default": "Pengguna On My Feet All Day" }
+    ]}
+  ],
+  "max_blocks": 12,
+  "presets": [{ "name": "Borang pesanan + buy box" }]
+}
+{% endschema %}

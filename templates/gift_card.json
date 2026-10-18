@@ -1,0 +1,15 @@
+{
+  "name": "gift_card",
+  "sections": {
+    "main": {
+      "type": "gift_card",
+      "settings": {
+        "heading": "Kad Hadiah InsoLab",
+        "body": "Tunjukkan kod ini atau imbas kod QR semasa membuat pembayaran."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

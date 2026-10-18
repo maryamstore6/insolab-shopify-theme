@@ -1,0 +1,48 @@
+<section class="section">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1>{{ article.title }}</h1>
+      {%- if section.settings.show_date -%}
+        <p class="lead">
+          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: section.settings.date_format }}</time>
+        </p>
+      {%- endif -%}
+    </div>
+
+    {%- if article.image -%}
+      <figure data-reveal>
+        <img src="{{ article.image | image_url: width: 1600 }}"
+             srcset="{{ article.image | image_url: width: 800 }} 800w,
+                     {{ article.image | image_url: width: 1200 }} 1200w,
+                     {{ article.image | image_url: width: 1600 }} 1600w"
+             sizes="(max-width: 900px) 92vw, 70vw"
+             alt="{{ article.image.alt | default: article.title | escape }}"
+             width="1600" height="900" loading="eager" decoding="async">
+      </figure>
+    {%- endif -%}
+
+    <div class="rte" data-reveal>{{ article.content }}</div>
+
+    <div class="hero-actions" style="margin-top:var(--s-4)">
+      <a class="btn btn--ghost" href="{{ blog.url }}">{{ section.settings.back_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Artikel",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Blog" },
+    { "type": "checkbox", "id": "show_date", "label": "Tunjuk tarikh terbit", "default": true },
+    { "type": "text", "id": "date_format", "label": "Format tarikh", "default": "%d %B %Y" },
+    { "type": "text", "id": "back_label", "label": "Label pautan kembali", "default": "Kembali ke blog" }
+  ],
+  "presets": [
+    { "name": "Artikel" }
+  ]
+}
+{% endschema %}

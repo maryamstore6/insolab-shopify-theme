@@ -1,0 +1,273 @@
+{
+  "name": "product",
+  "sections": {
+    "product": {
+      "type": "main-product",
+      "settings": {
+        "eyebrow": "Order",
+        "heading": "Mula dengan impression kit.",
+        "variant_label": "Pilih pakej",
+        "show_customer_fields": true,
+        "name_label": "Nama Penuh *",
+        "phone_label": "No. Telefon *",
+        "name_placeholder": "Seperti dalam kad pengenalan",
+        "phone_placeholder": "01X-XXX XXXX",
+        "email_label": "Email",
+        "email_placeholder": "nama@email.com",
+        "addr_label": "Alamat Penghantaran",
+        "addr_placeholder": "No. rumah, jalan",
+        "city_label": "Bandar",
+        "city_placeholder": "Bandar",
+        "state_label": "Negeri",
+        "state_placeholder": "Negeri",
+        "post_label": "Poskod",
+        "post_placeholder": "XXXXX",
+        "notes_label": "Nota (pilihan)",
+        "notes_placeholder": "Ada apa-apa kami perlu tahu?",
+        "note": "Dengan membuat pesanan, anda bersetuju dengan terma kami. InsoLab custom insoles adalah produk untuk keselesaan dan sokongan — bukan alat perubatan.",
+        "picker_title": "Pilih Pakej Anda",
+        "picker_sub": "Makin banyak, makin jimat.",
+        "pick_collection": "",
+        "pick_default": 1,
+        "badge_text": "PALING JIMAT",
+        "no_collection_text": "Pilih koleksi pakej dalam tetapan seksyen ini.",
+        "qty_label": "Kuantiti",
+        "qty_minus_label": "Kurangkan kuantiti",
+        "qty_plus_label": "Tambah kuantiti",
+        "cta_label": "Tambah ke Troli",
+        "ship_note": "Penghantaran percuma — kami tanggung kos pos kit dan penghantaran balik",
+        "urgency": "Kit dipos dalam 2–3 hari kerja",
+        "secure": "Pembayaran selamat melalui Shopify"
+      },
+      "blocks": {
+        "trust-1": {
+          "type": "trust",
+          "settings": {
+            "text": "100 Hari Jaminan"
+          }
+        },
+        "trust-2": {
+          "type": "trust",
+          "settings": {
+            "text": "Impression Kit Percuma"
+          }
+        },
+        "trust-3": {
+          "type": "trust",
+          "settings": {
+            "text": "Penghantaran Percuma"
+          }
+        },
+        "benefit-1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Dibuat ikut acuan kaki anda sendiri"
+          }
+        },
+        "benefit-2": {
+          "type": "benefit",
+          "settings": {
+            "text": "Imprint di rumah — 5 minit, tiada temujanji"
+          }
+        },
+        "benefit-3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Penghantaran seluruh Malaysia"
+          }
+        },
+        "benefit-4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Tak puas hati? Kami baiki dalam 100 hari"
+          }
+        },
+        "quote-1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Kerja saya berdiri 8 jam sehari. Lepas pakai ni, kaki tak penat macam dulu.",
+            "name": "Ahmad R.",
+            "role": "Pengguna On My Feet All Day"
+          }
+        }
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "eyebrow": "Pengalaman",
+        "heading": "Apa kata mereka."
+      },
+      "blocks": {
+        "quote-1": {
+          "type": "quote",
+          "settings": {
+            "quote": "Kerja saya berdiri 8 jam sehari. Lepas pakai ni, kaki tak penat macam dulu.",
+            "name": "Ahmad R.",
+            "product": "On My Feet All Day"
+          }
+        },
+        "quote-2": {
+          "type": "quote",
+          "settings": {
+            "quote": "Prosesnya senang. Buat imprint di rumah, hantar balik. Tak perlu pergi mana-mana.",
+            "name": "Siti N.",
+            "product": "Normal Everyday Activity"
+          }
+        },
+        "quote-3": {
+          "type": "quote",
+          "settings": {
+            "quote": "Ambil 2 unit untuk saya dan suami. Harga berbaloi, selesa dipakai.",
+            "name": "Lim W.",
+            "product": "2 Unit Package"
+          }
+        }
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "eyebrow": "Soalan Lazim",
+        "heading": "Yang selalu ditanya."
+      },
+      "blocks": {
+        "group-1": {
+          "type": "group",
+          "settings": {
+            "title": "Proses"
+          },
+          "blocks": {
+            "group-1-1": {
+              "type": "item",
+              "settings": {
+                "question": "Apa itu impression kit?",
+                "answer": "<p>Impression kit ialah set yang mengandungi dua buah foam tray. Anda tekan kaki ke dalam tray untuk mengambil bentuk kaki anda. Bentuk itu kami gunakan sebagai rujukan untuk menghasilkan insole custom anda.</p>"
+              }
+            },
+            "group-1-2": {
+              "type": "item",
+              "settings": {
+                "question": "Bagaimana cara buat imprint?",
+                "answer": "<p>Buka foam tray, letak di atas permukaan keras, tekan kaki dengan berat badan penuh. Lebih kurang 5 minit. Panduan bergambar ada dalam kit.</p>"
+              }
+            },
+            "group-1-3": {
+              "type": "item",
+              "settings": {
+                "question": "Berapa lama kit sampai?",
+                "answer": "<p>2–3 hari kerja dari tarikh pesanan dan pembayaran disahkan.</p>"
+              }
+            },
+            "group-1-4": {
+              "type": "item",
+              "settings": {
+                "question": "Bagaimana cara hantar balik kit?",
+                "answer": "<p>Kit disertakan dengan airway bill prabayar. Hantar di pejabat pos terdekat. Tiada kos untuk anda.</p>"
+              }
+            },
+            "group-1-5": {
+              "type": "item",
+              "settings": {
+                "question": "Berapa lama insole siap?",
+                "answer": "<p>12–18 hari kerja selepas kami terima impression kit anda. Kami maklumkan melalui WhatsApp atau email.</p>"
+              }
+            }
+          }
+        },
+        "group-2": {
+          "type": "group",
+          "settings": {
+            "title": "Produk"
+          },
+          "blocks": {
+            "group-2-1": {
+              "type": "item",
+              "settings": {
+                "question": "Apa beza antara kedua-dua produk?",
+                "answer": "<p><strong>On My Feet All Day</strong> — untuk yang berdiri atau berjalan 4+ jam sehari. Sokongan lebih tegas.<br><br><strong>Normal Everyday Activity</strong> — untuk aktiviti harian 1–4 jam. Lebih ringan dan semula jadi.</p>"
+              }
+            },
+            "group-2-2": {
+              "type": "item",
+              "settings": {
+                "question": "Boleh pakai dengan semua jenis kasut?",
+                "answer": "<p>Sesuai untuk kebanyakan kasut yang mempunyai ruang mencukupi — kasut sukan, kasut kerja, kasut harian. Untuk kasut yang sangat ketat, tanya kami di WhatsApp.</p>"
+              }
+            },
+            "group-2-3": {
+              "type": "item",
+              "settings": {
+                "question": "Berapa lama insole tahan?",
+                "answer": "<p>Tempoh penggunaan bergantung pada kekerapan dan cara penggunaan. Kalau anda rasa sokongan mula berkurang, hubungi kami — kami boleh nilaikan keadaan insole anda.</p>"
+              }
+            }
+          }
+        },
+        "group-3": {
+          "type": "group",
+          "settings": {
+            "title": "Jaminan"
+          },
+          "blocks": {
+            "group-3-1": {
+              "type": "item",
+              "settings": {
+                "question": "Apa maksud 100 hari jaminan?",
+                "answer": "<p>Dalam 100 hari pertama, kalau anda tidak berpuas hati, kami akan membaiki atau mengubah suai insole anda secara percuma. Ini bukan refund wang.</p>"
+              }
+            },
+            "group-3-2": {
+              "type": "item",
+              "settings": {
+                "question": "Apa perlu buat kalau tak puas hati?",
+                "answer": "<p>WhatsApp kami di {{ settings.whatsapp_display }}. Beritahu nombor pesanan anda dan apa yang tidak kena.</p>"
+              }
+            }
+          }
+        },
+        "group-4": {
+          "type": "group",
+          "settings": {
+            "title": "Penghantaran & Umum"
+          },
+          "blocks": {
+            "group-4-1": {
+              "type": "item",
+              "settings": {
+                "question": "Ke mana sahaja penghantaran?",
+                "answer": "<p>Buat masa ini, penghantaran dalam Malaysia sahaja.</p>"
+              }
+            },
+            "group-4-2": {
+              "type": "item",
+              "settings": {
+                "question": "Berapa lama keseluruhan proses?",
+                "answer": "<p>Kira-kira 3–4 minggu dari tarikh pesanan: 2–3 hari kerja untuk kit sampai, masa anda buat imprint, masa penghantaran balik, dan 12–18 hari kerja untuk kami hasilkan insole.</p>"
+              }
+            },
+            "group-4-3": {
+              "type": "item",
+              "settings": {
+                "question": "Adakah InsoLab produk kesihatan?",
+                "answer": "<p><strong>Tidak.</strong> InsoLab custom insoles adalah produk untuk keselesaan, sokongan dan fesyen custom. Produk ini tidak bertujuan untuk mendiagnosis, merawat atau menyembuhkan apa-apa penyakit. Untuk sebarang masalah kesihatan kaki, sila rujuk pakar perubatan.</p>"
+              }
+            },
+            "group-4-4": {
+              "type": "item",
+              "settings": {
+                "question": "Ada soalan lain?",
+                "answer": "<p>WhatsApp kami di {{ settings.whatsapp_display }} — kami biasanya balas dalam masa sehari.</p>"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "order": [
+    "product",
+    "testimonials",
+    "faq"
+  ]
+}

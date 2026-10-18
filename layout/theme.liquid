@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="{{ settings.color_paper }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <title>{{ page_title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {%- comment -%} Open Graph / Twitter {%- endcomment -%}
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:type" content="website">
+  {% if page_description %}<meta property="og:description" content="{{ page_description | escape }}">{% endif %}
+  {% if settings.share_image %}
+    <meta property="og:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+  {% else %}
+    <meta property="og:image" content="{{ 'og-image.png' | asset_url | prepend: 'https:' }}">
+  {% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title | escape }}">
+  {% if page_description %}<meta name="twitter:description" content="{{ page_description | escape }}">{% endif %}
+  {% if settings.share_image %}
+    <meta name="twitter:image" content="{{ settings.share_image | image_url: width: 1200 }}">
+  {% else %}
+    <meta name="twitter:image" content="{{ 'og-image.png' | asset_url | prepend: 'https:' }}">
+  {% endif %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {%- comment -%}
+    Only the wght axis is requested. Several fonts in the Theme settings
+    dropdown (Space Grotesk, Sora, Outfit) have no true italic; requesting the
+    ital axis for those is pointless, so the browser synthesises the oblique
+    used for <em> instead. Verified: all 14 dropdown fonts resolve here.
+  {%- endcomment -%}
+  <link href="https://fonts.googleapis.com/css2?family={{ settings.font_display | replace: ' ', '+' }}:wght@400;600;700&family={{ settings.font_body | replace: ' ', '+' }}:wght@400;500;600&display=swap" rel="stylesheet">
+
+  {% if settings.favicon %}
+    <link rel="icon" href="{{ settings.favicon | image_url: width: 64 }}" type="image/png">
+  {% else %}
+    <link rel="icon" href="{{ 'favicon.svg' | asset_url }}" type="image/svg+xml">
+  {% endif %}
+
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+
+  {%- comment -%} Brand colours as CSS variables so the merchant can restyle
+      the whole theme from Theme settings without touching CSS. {%- endcomment -%}
+  <style>
+    :root {
+      --navy: {{ settings.color_ink }};
+      --navy-deep: {{ settings.color_ink }};
+      --charcoal: {{ settings.color_ink }};
+      --muted: {{ settings.color_ink }};
+      --teal: {{ settings.color_accent }};
+      --teal-deep: {{ settings.color_accent_deep }};
+      --teal-darker: {{ settings.color_accent_deep }};
+      --accent: {{ settings.color_accent_deep }};
+      --accent-bright: {{ settings.color_accent }};
+      --accent-deep: {{ settings.color_accent_deep }};
+      --light-blue: {{ settings.color_accent_soft }};
+      --soft-gray: {{ settings.color_paper }};
+      --paper: {{ settings.color_paper }};
+      --paper-warm: {{ settings.color_accent_soft }};
+      --font-display: "{{ settings.font_display }}", Georgia, "Times New Roman", serif;
+      --font-body: "{{ settings.font_body }}", "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+  </style>
+
+  <script src="{{ 'gsap.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'ScrollTrigger.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'lenis.min.js' | asset_url }}" defer></script>
+
+  {{ content_for_header }}
+</head>
+<body class="is-loading">
+
+{%- comment -%} FILM TEXTURE (decorative) {%- endcomment -%}
+<div class="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
+
+{% section 'header' %}
+
+<main id="top">
+  {{ content_for_layout }}
+</main>
+
+{% section 'footer' %}
+
+{%- comment -%} Floating WhatsApp button {%- endcomment -%}
+{%- assign wa_label = 'WhatsApp' -%}
+{%- if settings.whatsapp_label != blank -%}{%- assign wa_label = settings.whatsapp_label -%}{%- endif -%}
+{% if settings.whatsapp_number != blank %}
+  <a class="wa-float"
+     href="https://wa.me/{{ settings.whatsapp_number | remove: ' ' | remove: '-' | remove: '+' }}"
+     target="_blank" rel="noopener"
+     aria-label="{{ wa_label | escape }}">
+    <span class="wa-float-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.6-.1a11 11 0 0 1-3-1.8 11 11 0 0 1-2.3-3c-.2-.5-.3-1-.2-1.5 0-.5.6-1.5 1.1-1.7.3-.1.6-.1.8 0l.9 1.5c.1.2 0 .4-.1.5l-.5.6c-.1.2-.2.3-.1.5a7 7 0 0 0 3.2 3c.2.1.4 0 .5-.1l.6-.6c.1-.2.3-.2.5-.1l1.5.8c.2.1.3.3.3.5s0 .4-.1.6z"/></svg>
+    </span>
+    <span class="wa-float-label">{{ wa_label }}</span>
+  </a>
+{% endif %}
+
+<script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

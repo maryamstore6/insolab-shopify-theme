@@ -1,0 +1,223 @@
+<section class="section" id="order-{{ section.id }}">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2 style="font-size:var(--t-lg);margin-top:var(--s-2)">{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="split split--buybox" style="align-items:start">
+      <div class="buybox" data-reveal data-order-section="{{ section.id }}">
+        {%- if section.blocks.size > 0 -%}
+        <div class="buybox-trust">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'trust' -%}
+              <span {{ block.shopify_attributes }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                {{ block.settings.text }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+
+        <ul class="buybox-benefits">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'benefit' -%}
+              <li {{ block.shopify_attributes }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        <div class="buybox-head">
+          <div class="buybox-title">{{ section.settings.pick_title }}</div>
+          <p class="buybox-sub">{{ section.settings.pick_sub }}</p>
+        </div>
+
+        <div class="pick-list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'package' -%}
+              <button type="button" class="pick{% if forloop.index == 1 %} is-picked{% endif %}"
+                      data-package
+                      data-name="{{ block.settings.name | escape }}"
+                      data-units="{{ block.settings.units }}"
+                      data-price="{{ block.settings.price | remove: 'RM' | remove: ',' | strip }}"
+                      {{ block.shopify_attributes }}>
+                {%- if block.settings.badge != blank -%}<span class="pick-badge">{{ block.settings.badge }}</span>{%- endif -%}
+                <span class="pick-top">
+                  <span class="pick-name">{{ block.settings.name }}</span>
+                  <span class="pick-price">
+                    {%- if block.settings.compare_price != blank -%}<s>{{ block.settings.compare_price }}</s>{%- endif -%}
+                    {{ block.settings.price }}
+                  </span>
+                </span>
+                <span class="pick-meta">{{ block.settings.meta }}</span>
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <div class="qty-row">
+          <span class="qty-label">{{ section.settings.qty_label }}</span>
+          <div class="qty-stepper">
+            <button type="button" data-qty-minus aria-label="Kurangkan kuantiti">&minus;</button>
+            <span data-qty-value aria-live="polite">1</span>
+            <button type="button" data-qty-plus aria-label="Tambah kuantiti">+</button>
+          </div>
+        </div>
+
+        <a href="https://wa.me/60176055349" data-wa-cta class="btn btn--primary btn--lg btn--block buybox-cta" target="_blank" rel="noopener">
+          {{ section.settings.cta_label }} — <span data-cta-total>RM599</span>
+        </a>
+
+        <div class="buybox-ship">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+          <span>{{ section.settings.ship_text }}</span>
+        </div>
+
+        <div class="summary-lines">
+          <div class="summary-line"><span>{{ section.settings.sum_product }}</span><span data-sum-name>—</span></div>
+          <div class="summary-line"><span>{{ section.settings.sum_qty }}</span><span data-sum-qty>—</span></div>
+          <div class="summary-line"><span>{{ section.settings.sum_kit }}</span><span>{{ section.settings.sum_kit_value }}</span></div>
+          <div class="summary-line"><span>{{ section.settings.sum_ship }}</span><span>{{ section.settings.sum_ship_value }}</span></div>
+        </div>
+
+        <div class="summary-total">
+          <span>{{ section.settings.sum_total }}</span>
+          <span data-sum-total>RM599</span>
+        </div>
+
+        <div class="buybox-urgency">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          {{ section.settings.urgency }}
+        </div>
+
+        <div class="buybox-secure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          {{ section.settings.secure }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var section = document.getElementById('order-{{ section.id }}');
+  if (!section) return;
+  var picks = section.querySelectorAll('[data-package]');
+  var qtyEl = section.querySelector('[data-qty-value]');
+  var minus = section.querySelector('[data-qty-minus]');
+  var plus = section.querySelector('[data-qty-plus]');
+  var cta = section.querySelector('[data-wa-cta]');
+  var ctaTotal = section.querySelector('[data-cta-total]');
+  var sumName = section.querySelector('[data-sum-name]');
+  var sumQty = section.querySelector('[data-sum-qty]');
+  var sumTotal = section.querySelector('[data-sum-total]');
+  var qty = 1, selected = picks[0];
+
+  function render() {
+    if (!selected) return;
+    var price = parseFloat(selected.getAttribute('data-price')) || 0;
+    var units = parseInt(selected.getAttribute('data-units'), 10) || 1;
+    var name = selected.getAttribute('data-name');
+    var total = price * qty;
+    var totalUnits = units * qty;
+    if (sumName) sumName.textContent = name;
+    if (sumQty) sumQty.textContent = qty > 1 ? qty + ' × ' + units + ' unit = ' + totalUnits + ' unit' : units + ' unit';
+    if (sumTotal) sumTotal.textContent = 'RM' + total;
+    if (ctaTotal) ctaTotal.textContent = 'RM' + total;
+    if (qtyEl) qtyEl.textContent = qty;
+    if (minus) minus.disabled = qty <= 1;
+    if (plus) plus.disabled = qty >= 10;
+    if (cta) {
+      var msg = encodeURIComponent('Hai InsoLab, saya nak order: ' + name + ' (' + totalUnits + ' unit) — RM' + total);
+      cta.href = 'https://wa.me/60176055349?text=' + msg;
+    }
+  }
+
+  picks.forEach(function (p) {
+    p.addEventListener('click', function () {
+      picks.forEach(function (o) { o.classList.remove('is-picked'); });
+      p.classList.add('is-picked');
+      selected = p;
+      qty = 1;
+      render();
+    });
+  });
+  if (minus) minus.addEventListener('click', function () { if (qty > 1) { qty--; render(); } });
+  if (plus) plus.addEventListener('click', function () { if (qty < 10) { qty++; render(); } });
+  render();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Order (WhatsApp)",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Order" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Mula dengan impression kit." },
+    { "type": "text", "id": "pick_title", "label": "Tajuk pilihan", "default": "Pilih Pakej Anda" },
+    { "type": "text", "id": "pick_sub", "label": "Sub pilihan", "default": "Makin banyak, makin jimat." },
+    { "type": "text", "id": "qty_label", "label": "Label kuantiti", "default": "Kuantiti" },
+    { "type": "text", "id": "cta_label", "label": "Label butang", "default": "Order via WhatsApp" },
+    { "type": "text", "id": "ship_text", "label": "Teks penghantaran", "default": "Penghantaran percuma — kami tanggung kos pos kit dan penghantaran balik" },
+    { "type": "text", "id": "sum_product", "label": "Label produk", "default": "Produk" },
+    { "type": "text", "id": "sum_qty", "label": "Label kuantiti ringkasan", "default": "Kuantiti" },
+    { "type": "text", "id": "sum_kit", "label": "Label kit", "default": "Impression Kit" },
+    { "type": "text", "id": "sum_kit_value", "label": "Nilai kit", "default": "Termasuk" },
+    { "type": "text", "id": "sum_ship", "label": "Label penghantaran", "default": "Penghantaran" },
+    { "type": "text", "id": "sum_ship_value", "label": "Nilai penghantaran", "default": "Percuma" },
+    { "type": "text", "id": "sum_total", "label": "Label jumlah", "default": "Jumlah" },
+    { "type": "text", "id": "urgency", "label": "Teks urgency", "default": "Kit dipos dalam 2–3 hari kerja" },
+    { "type": "text", "id": "secure", "label": "Teks keselamatan", "default": "Pembayaran disahkan melalui WhatsApp" }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust badge",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Teks", "default": "100 Hari Jaminan" }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Teks", "default": "Dibuat ikut acuan kaki anda sendiri" }
+      ]
+    },
+    {
+      "type": "package",
+      "name": "Pakej",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nama", "default": "On My Feet All Day" },
+        { "type": "text", "id": "meta", "label": "Meta", "default": "1 unit · aktiviti berat 4+ jam" },
+        { "type": "text", "id": "price", "label": "Harga", "default": "RM599" },
+        { "type": "text", "id": "compare_price", "label": "Harga coret" },
+        { "type": "text", "id": "units", "label": "Bilangan unit", "default": "1" },
+        { "type": "text", "id": "badge", "label": "Badge" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Order (WhatsApp)",
+      "blocks": [
+        { "type": "trust", "settings": { "text": "100 Hari Jaminan" } },
+        { "type": "trust", "settings": { "text": "Impression Kit Percuma" } },
+        { "type": "trust", "settings": { "text": "Penghantaran Percuma" } },
+        { "type": "benefit", "settings": { "text": "Dibuat ikut acuan kaki anda sendiri" } },
+        { "type": "benefit", "settings": { "text": "Imprint di rumah — 5 minit, tiada temujanji" } },
+        { "type": "benefit", "settings": { "text": "Penghantaran seluruh Malaysia" } },
+        { "type": "benefit", "settings": { "text": "Tak puas hati? Kami baiki dalam 100 hari" } },
+        { "type": "package", "settings": { "name": "On My Feet All Day", "meta": "1 unit · aktiviti berat 4+ jam", "price": "RM599", "units": "1" } },
+        { "type": "package", "settings": { "name": "Normal Everyday Activity", "meta": "1 unit · aktiviti harian 1–4 jam", "price": "RM599", "units": "1" } },
+        { "type": "package", "settings": { "name": "2 Unit Package", "meta": "2 unit · jimat RM99", "price": "RM1099", "compare_price": "RM1198", "units": "2", "badge": "PALING JIMAT" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

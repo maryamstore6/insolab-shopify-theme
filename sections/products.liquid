@@ -1,0 +1,154 @@
+<section class="section" id="products">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    {%- assign col = collections[section.settings.collection] -%}
+
+    {%- if col != blank and col.products.size > 0 -%}
+      <div class="product-grid" data-reveal-group>
+        {%- for product in col.products limit: section.settings.limit -%}
+          <article class="product-card" data-reveal>
+            <div class="product-media">
+              {%- if product.tags contains section.settings.badge_tag -%}
+                <span class="product-badge">{{ section.settings.badge_text }}</span>
+              {%- endif -%}
+              <a href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+                {%- if product.featured_image -%}
+                  <img src="{{ product.featured_image | image_url: width: 640 }}"
+                       srcset="{{ product.featured_image | image_url: width: 320 }} 320w,
+                               {{ product.featured_image | image_url: width: 640 }} 640w,
+                               {{ product.featured_image | image_url: width: 960 }} 960w"
+                       sizes="(max-width: 900px) 92vw, 40vw"
+                       alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                       class="product-art" width="640" height="640"
+                       loading="lazy" decoding="async">
+                {%- else -%}
+                  <img src="{{ 'insole-support.svg' | asset_url }}" alt="{{ product.title | escape }}"
+                       class="product-art" width="320" height="660" loading="lazy">
+                {%- endif -%}
+              </a>
+            </div>
+            <div class="product-body">
+              <h3 class="product-name"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              {%- if product.description != blank -%}
+                <p class="product-desc">{{ product.description | strip_html | truncate: 160 }}</p>
+              {%- endif -%}
+              <div class="product-foot">
+                <div class="product-price">
+                  {%- if product.compare_at_price > product.price -%}
+                    <s>{{ product.compare_at_price | money }}</s>
+                  {%- endif -%}
+                  {{ product.price | money }} <small>/ {{ 'products.product.per_unit' | t }}</small>
+                </div>
+                <a href="{{ product.url }}" class="btn btn--primary">{{ section.settings.cta_label }}</a>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      {%- comment -%} No collection wired yet: show the bundled art so the
+          theme is still presentable on first install. {%- endcomment -%}
+      <div class="product-grid" data-reveal-group>
+        {%- for block in section.blocks -%}
+          <article class="product-card" data-reveal {{ block.shopify_attributes }}>
+            <div class="product-media">
+              {%- if block.settings.badge != blank -%}<span class="product-badge">{{ block.settings.badge }}</span>{%- endif -%}
+              {% if block.settings.art != blank %}<img src="{{ block.settings.art | image_url: width: 640 }}"
+                   alt="{{ block.settings.name | escape }}" class="product-art"
+                   width="640" height="640" loading="lazy">
+              {% else %}<img src="{% if block.settings.fallback_art != blank %}{{ block.settings.fallback_art | asset_url }}{% else %}{{ 'insole-support.svg' | asset_url }}{% endif %}"
+                   alt="{{ block.settings.name | escape }}" class="product-art"
+                   width="320" height="660" loading="lazy">{% endif %}
+            </div>
+            <div class="product-body">
+              <h3 class="product-name">{{ block.settings.name }}</h3>
+              <p class="product-desc">{{ block.settings.description }}</p>
+              <div class="product-foot">
+                <div class="product-price">{{ block.settings.price }}</div>
+                <a href="{{ block.settings.link | default: '#order' }}" class="btn btn--primary">{{ section.settings.cta_label }}</a>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.bundle_heading != blank -%}
+      <div class="bundle-strip" data-reveal>
+        <div>
+          <h3>{{ section.settings.bundle_heading }}</h3>
+          {%- if section.settings.bundle_body != blank -%}<p>{{ section.settings.bundle_body }}</p>{%- endif -%}
+        </div>
+        <a href="{{ section.settings.bundle_url | default: '#order' }}" class="btn btn--primary btn--lg">{{ section.settings.bundle_cta }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produk",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Produk" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "default": "Dua pilihan. Dua cara hidup." },
+    { "type": "collection", "id": "collection", "label": "Koleksi produk" },
+    { "type": "range", "id": "limit", "label": "Bilangan produk", "min": 2, "max": 12, "step": 1, "default": 4 },
+    { "type": "text", "id": "cta_label", "label": "Label butang", "default": "Order" },
+    { "type": "header", "content": "Badge" },
+    { "type": "text", "id": "badge_tag", "label": "Tag produk untuk badge", "default": "heavy" },
+    { "type": "text", "id": "badge_text", "label": "Teks badge", "default": "Aktiviti Berat" },
+    { "type": "header", "content": "Banner bundle" },
+    { "type": "text", "id": "bundle_heading", "label": "Tajuk bundle", "default": "Ambil dua, jimat RM99." },
+    { "type": "text", "id": "bundle_body", "label": "Teks bundle", "default": "Untuk anda dan pasangan." },
+    { "type": "text", "id": "bundle_cta", "label": "Butang bundle", "default": "Order 2 Unit" },
+    { "type": "url", "id": "bundle_url", "label": "Pautan bundle" }
+  ],
+  "blocks": [
+    {
+      "type": "fallback",
+      "name": "Kad produk (fallback)",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nama", "default": "On My Feet All Day" },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "Aktiviti Berat" },
+        { "type": "textarea", "id": "description", "label": "Keterangan", "default": "Untuk yang berdiri atau berjalan 4+ jam sehari. Sokongan lebih tegas." },
+        { "type": "text", "id": "price", "label": "Harga (teks)", "default": "RM599" },
+        { "type": "url", "id": "link", "label": "Pautan" },
+        { "type": "image_picker", "id": "art", "label": "Gambar kad (pilihan)" },
+        { "type": "text", "id": "fallback_art", "label": "Fail gambar terbina dalam (pilihan)", "info": "Contoh: insole-support.svg atau insole-everyday.svg" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Produk",
+      "blocks": [
+        {
+          "type": "fallback",
+          "settings": {
+            "name": "On My Feet All Day",
+            "badge": "Aktiviti Berat",
+            "description": "Untuk yang berdiri atau berjalan 4+ jam sehari. Sokongan lebih tegas.",
+            "price": "RM599",
+            "fallback_art": "insole-support.svg"
+          }
+        },
+        {
+          "type": "fallback",
+          "settings": {
+            "name": "Normal Everyday Activity",
+            "badge": "",
+            "description": "Untuk aktiviti harian 1–4 jam. Lebih ringan dan semula jadi.",
+            "price": "RM599",
+            "fallback_art": "insole-everyday.svg"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

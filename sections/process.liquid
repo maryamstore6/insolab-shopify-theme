@@ -1,0 +1,124 @@
+<section class="section" id="process">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    {%- if section.settings.image != blank or section.settings.show_fallback -%}
+      <figure class="process-figure" data-reveal>
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1440 }}"
+               srcset="{{ section.settings.image | image_url: width: 760 }} 760w,
+                       {{ section.settings.image | image_url: width: 1024 }} 1024w,
+                       {{ section.settings.image | image_url: width: 1440 }} 1440w,
+                       {{ section.settings.image | image_url: width: 1920 }} 1920w"
+               sizes="(max-width: 900px) 92vw, min(1100px, 92vw)"
+               alt="{{ section.settings.image_alt | escape }}"
+               class="process-figure-img"
+               width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}"
+               loading="lazy" decoding="async">
+        {%- else -%}
+          {%- comment -%}
+            Bundled fallback. WebP first (roughly half the bytes), JPEG as the
+            universal fallback, and the full ladder of rungs from 380w so small
+            phones do not download a 760w image.
+          {%- endcomment -%}
+          <picture>
+            <source type="image/webp"
+                    sizes="(max-width: 900px) 92vw, min(1100px, 92vw)"
+                    srcset="{{ 'process-workflow-380.webp' | asset_url }} 380w,
+                            {{ 'process-workflow-560.webp' | asset_url }} 560w,
+                            {{ 'process-workflow-760.webp' | asset_url }} 760w,
+                            {{ 'process-workflow-1024.webp' | asset_url }} 1024w,
+                            {{ 'process-workflow-1440.webp' | asset_url }} 1440w,
+                            {{ 'process-workflow-1920.webp' | asset_url }} 1920w,
+                            {{ 'process-workflow-2496.webp' | asset_url }} 2496w">
+            <img src="{{ 'process-workflow-1440.jpg' | asset_url }}"
+                 srcset="{{ 'process-workflow-380.jpg' | asset_url }} 380w,
+                         {{ 'process-workflow-560.jpg' | asset_url }} 560w,
+                         {{ 'process-workflow-760.jpg' | asset_url }} 760w,
+                         {{ 'process-workflow-1024.jpg' | asset_url }} 1024w,
+                         {{ 'process-workflow-1440.jpg' | asset_url }} 1440w,
+                         {{ 'process-workflow-1920.jpg' | asset_url }} 1920w,
+                         {{ 'process-workflow-2496.jpg' | asset_url }} 2496w"
+                 sizes="(max-width: 900px) 92vw, min(1100px, 92vw)"
+                 alt="{{ section.settings.image_alt | escape }}"
+                 class="process-figure-img" width="2496" height="1728"
+                 loading="lazy" decoding="async">
+          </picture>
+        {%- endif -%}
+        {%- if section.settings.caption != blank -%}
+          <figcaption>{{ section.settings.caption }}</figcaption>
+        {%- endif -%}
+      </figure>
+    {%- endif -%}
+
+    <div class="process-list">
+      {%- for block in section.blocks -%}
+        <div class="process-row" {{ block.shopify_attributes }}>
+          <div class="process-visual">
+            {%- comment -%}
+              The step icon is a BUNDLED asset filename, not a merchant upload.
+              An image_picker cannot carry a bundled file (Shopify: image_picker
+              "doesn't support the default attribute"), so this is a text setting
+              resolved through asset_url. A merchant can point it at any file in
+              assets/, and the default keeps the theme complete on install.
+            {%- endcomment -%}
+            <img src="{% if block.settings.icon != blank %}{{ block.settings.icon | asset_url }}{% else %}{{ 'process-01-order.svg' | asset_url }}{% endif %}"
+                 alt="" width="120" height="92" loading="lazy" aria-hidden="true">
+          </div>
+          <div class="process-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+          <div class="process-name">{{ block.settings.name }}</div>
+          <div class="process-body">
+            <div class="process-desc">{{ block.settings.description }}</div>
+            {%- if block.settings.time != blank -%}
+              <div class="process-time">{{ block.settings.time }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Proses",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Proses" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "default": "Enam langkah. Satu insole." },
+    { "type": "image_picker", "id": "image", "label": "Gambar alur kerja (pilihan)" },
+    { "type": "text", "id": "image_alt", "label": "Alt teks", "default": "Enam langkah proses InsoLab" },
+    { "type": "text", "id": "caption", "label": "Kapsyen", "default": "Daripada acuan kaki hingga insole siap — semua di bengkel kami." },
+    { "type": "checkbox", "id": "show_fallback", "label": "Guna gambar contoh jika tiada", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Langkah",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nama langkah", "default": "Order" },
+        { "type": "textarea", "id": "description", "label": "Keterangan", "default": "Pilih produk, buat pesanan." },
+        { "type": "text", "id": "time", "label": "Masa (pilihan)" },
+                {
+          "type": "text",
+          "id": "icon",
+          "label": "Ikon langkah",
+          "info": "Nama fail dalam assets/, contoh: process-02-kit.svg",
+          "default": "process-01-order.svg"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [{ "name": "Proses", "blocks": [
+    { "type": "step", "settings": { "name": "Order", "description": "Pilih produk, buat pesanan. Kami WhatsApp untuk pengesahan bayaran.", "icon": "process-01-order.svg" } },
+    { "type": "step", "settings": { "name": "Impression Kit", "description": "Kit sampai ke rumah — foam tray dan panduan bergambar.", "time": "2–3 hari kerja", "icon": "process-02-kit.svg" } },
+    { "type": "step", "settings": { "name": "Imprint", "description": "Tekan kaki ke foam tray. Lebih kurang 5 minit.", "icon": "process-03-imprint.svg" } },
+    { "type": "step", "settings": { "name": "Hantar Balik", "description": "Guna airway bill prabayar kami. Tiada kos.", "time": "Postage percuma", "icon": "process-04-return.svg" } },
+    { "type": "step", "settings": { "name": "Kami Hasilkan", "description": "Kami hasilkan insole ikut bentuk kaki anda.", "time": "12–18 hari kerja", "icon": "process-05-make.svg" } },
+    { "type": "step", "settings": { "name": "Sampai Ke Rumah", "description": "Insole sampai ke rumah. Kami maklumkan bila ia dihantar.", "time": "Seluruh Malaysia", "icon": "process-06-delivery.svg" } }
+  ]}]
+}
+{% endschema %}

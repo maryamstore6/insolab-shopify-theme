@@ -1,0 +1,17 @@
+{
+  "name": "cart",
+  "sections": {
+    "main": {
+      "type": "cart",
+      "settings": {
+        "eyebrow": "Troli",
+        "heading": "Troli anda.",
+        "empty_text": "Troli anda kosong.",
+        "continue_shopping": "Lihat Produk"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

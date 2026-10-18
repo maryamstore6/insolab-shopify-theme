@@ -1,0 +1,63 @@
+<section class="section" id="kenapa">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="split" data-reveal>
+      <div class="split-copy">
+        <p class="lead">{{ section.settings.body }}</p>
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_url | default: '#products' }}" class="btn btn--ghost">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+      </div>
+
+      <figure class="statement-figure" id="arch" data-reveal>
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 1024 }}"
+               srcset="{{ section.settings.image | image_url: width: 380 }} 380w,
+                       {{ section.settings.image | image_url: width: 560 }} 560w,
+                       {{ section.settings.image | image_url: width: 760 }} 760w,
+                       {{ section.settings.image | image_url: width: 1024 }} 1024w"
+               sizes="(max-width: 900px) 92vw, 44vw"
+               alt="{{ section.settings.image_alt | escape }}"
+               class="statement-img" width="1024" height="1024" loading="lazy" decoding="async">
+        {%- else -%}
+          {%- comment -%} Bundled fallback: WebP first, JPEG for older browsers. {%- endcomment -%}
+          <picture>
+            <source type="image/webp"
+                    sizes="(max-width: 900px) 92vw, 44vw"
+                    srcset="{{ 'arch-types-380.webp' | asset_url }} 380w, {{ 'arch-types-560.webp' | asset_url }} 560w, {{ 'arch-types-760.webp' | asset_url }} 760w, {{ 'arch-types-1024.webp' | asset_url }} 1024w">
+            <img src="{{ 'arch-types-760.jpg' | asset_url }}"
+                 srcset="{{ 'arch-types-380.jpg' | asset_url }} 380w, {{ 'arch-types-560.jpg' | asset_url }} 560w, {{ 'arch-types-760.jpg' | asset_url }} 760w, {{ 'arch-types-1024.jpg' | asset_url }} 1024w"
+                 sizes="(max-width: 900px) 92vw, 44vw"
+                 alt="{{ section.settings.image_alt | escape }}"
+                 class="statement-img" width="1024" height="1024" loading="lazy" decoding="async">
+          </picture>
+        {%- endif -%}
+        {%- if section.settings.caption != blank -%}
+          <figcaption>{{ section.settings.caption }}</figcaption>
+        {%- endif -%}
+      </figure>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kenapa InsoLab",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Kenapa InsoLab" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "default": "Setiap kaki itu berbeza." },
+    { "type": "textarea", "id": "body", "label": "Teks", "default": "Tiada dua kaki yang sama. Lengkok, lebar dan cara anda menapak — semuanya berbeza antara satu orang dengan yang lain. Insole yang sesuai untuk orang lain belum tentu sesuai untuk anda. Sebab itu acuan kaki anda sendiri yang jadi panduan kami." },
+    { "type": "text", "id": "cta_label", "label": "Label butang", "default": "Lihat Produk" },
+    { "type": "url", "id": "cta_url", "label": "Pautan butang" },
+    { "type": "header", "content": "Gambar" },
+    { "type": "image_picker", "id": "image", "label": "Gambar (pilihan)" },
+    { "type": "text", "id": "image_alt", "label": "Alt teks", "default": "Tiga jenis bentuk kaki — normal, flat dan high arch" },
+    { "type": "text", "id": "caption", "label": "Kapsyen", "default": "Normal, flat atau high arch — setiap bentuk perlukan sokongan yang berbeza." }
+  ],
+  "presets": [{ "name": "Kenapa InsoLab" }]
+}
+{% endschema %}

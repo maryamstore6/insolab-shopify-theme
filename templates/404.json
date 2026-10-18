@@ -1,0 +1,17 @@
+{
+  "name": "404",
+  "sections": {
+    "main": {
+      "type": "404",
+      "settings": {
+        "eyebrow": "404",
+        "heading": "Halaman tidak dijumpai.",
+        "body": "Pautan yang anda ikuti mungkin sudah dipadam atau dialihkan. Semak sekali lagi, atau kembali ke laman utama.",
+        "cta_label": "Kembali ke Utama"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

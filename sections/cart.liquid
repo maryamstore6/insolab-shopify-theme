@@ -1,0 +1,68 @@
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1>{{ section.settings.heading }}</h1>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>{{ 'cart.general.product' | t }}</th>
+              <th>{{ 'cart.general.price' | t }}</th>
+              <th>{{ 'cart.general.quantity' | t }}</th>
+              <th>{{ 'cart.general.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr>
+                <td>
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                  {%- unless item.product.has_only_default_variant -%}
+                    <small>{{ item.variant.title }}</small>
+                  {%- endunless -%}
+                </td>
+                <td>{{ item.price | money }}</td>
+                <td>
+                  <input type="number" name="updates[]" value="{{ item.quantity }}" min="0"
+                         aria-label="{{ 'cart.general.quantity' | t }} {{ item.product.title | escape }}">
+                </td>
+                <td>{{ item.line_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div class="summary-total">
+          <span>{{ 'cart.general.total' | t }}</span><span>{{ cart.total_price | money }}</span>
+        </div>
+
+        <div class="hero-actions" style="margin-top:var(--s-4)">
+          <button type="submit" name="update" class="btn btn--ghost">{{ 'cart.general.update' | t }}</button>
+          <button type="submit" name="checkout" class="btn btn--primary btn--lg">{{ 'cart.general.checkout' | t }}</button>
+        </div>
+      </form>
+    {%- else -%}
+      <p>{{ section.settings.empty_text }}</p>
+      <div class="hero-actions">
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">{{ section.settings.continue_shopping }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Troli" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "default": "Troli anda." },
+    { "type": "text", "id": "empty_text", "label": "Teks troli kosong", "default": "Troli anda kosong." },
+    { "type": "text", "id": "continue_shopping", "label": "Label butang beli-belah", "default": "Lihat Produk" }
+  ],
+  "presets": [{ "name": "Cart" }]
+}
+{% endschema %}

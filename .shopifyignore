@@ -1,0 +1,11 @@
+README.md
+.git
+.github
+node_modules
+*.zip
+package.json
+scripts
+.editorconfig
+.gitignore
+.theme-check.yml
+insolab-shopify-theme.zip

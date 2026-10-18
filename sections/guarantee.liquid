@@ -1,0 +1,25 @@
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="guarantee" data-reveal>
+      <div class="guarantee-inner">
+        {%- if section.settings.pill != blank -%}
+          <span class="guarantee-pill">{{ section.settings.pill }}</span>
+        {%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.body }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Jaminan",
+  "settings": [
+    { "type": "text", "id": "pill", "label": "Pil", "default": "100 Hari Jaminan" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "default": "Tak puas hati? Kami baiki." },
+    { "type": "textarea", "id": "body", "label": "Teks", "default": "Dalam 100 hari pertama, kalau anda tak puas hati, kami baiki atau ubah suai insole anda secara percuma." }
+  ],
+  "presets": [{ "name": "Jaminan" }]
+}
+{% endschema %}

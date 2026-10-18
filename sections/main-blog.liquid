@@ -1,0 +1,94 @@
+<section class="section">
+  <div class="wrap">
+    {%- assign heading = section.settings.heading | default: blog.title -%}
+    <div class="section-head" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1>{{ heading }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="lead">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- paginate blog.articles by section.settings.articles_per_page -%}
+      {%- if blog.articles.size > 0 -%}
+        <div class="product-grid" data-reveal-group>
+          {%- for article in blog.articles -%}
+            <article class="product-card" data-reveal>
+              {%- if article.image -%}
+                <div class="product-media">
+                  <a href="{{ article.url }}" tabindex="-1" aria-hidden="true">
+                    <img src="{{ article.image | image_url: width: 640 }}"
+                         srcset="{{ article.image | image_url: width: 320 }} 320w,
+                                 {{ article.image | image_url: width: 640 }} 640w,
+                                 {{ article.image | image_url: width: 960 }} 960w"
+                         sizes="(max-width: 900px) 92vw, 40vw"
+                         alt="{{ article.image.alt | default: article.title | escape }}"
+                         class="product-art" width="640" height="400"
+                         loading="lazy" decoding="async">
+                  </a>
+                </div>
+              {%- endif -%}
+
+              <div class="product-body">
+                <h2 class="product-name"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+
+                {%- if section.settings.show_date -%}
+                  <p class="product-desc">
+                    <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: section.settings.date_format }}</time>
+                  </p>
+                {%- endif -%}
+
+                <p class="product-desc">{{ article.excerpt_or_content | strip_html | truncate: 160 }}</p>
+
+                <div class="product-foot">
+                  <a class="btn btn--ghost" href="{{ article.url }}">{{ section.settings.read_more_label }}</a>
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="hero-actions" style="margin-top:var(--s-4)"
+               aria-label="{{ section.settings.pagination_label }}">
+            {%- if paginate.previous -%}
+              <a class="btn btn--ghost" href="{{ paginate.previous.url }}">{{ section.settings.prev_label }}</a>
+            {%- endif -%}
+            <span class="product-desc">{{ section.settings.page_label }} {{ paginate.current_page }} / {{ paginate.pages }}</span>
+            {%- if paginate.next -%}
+              <a class="btn btn--ghost" href="{{ paginate.next.url }}">{{ section.settings.next_label }}</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <p class="lead" role="status">{{ section.settings.empty_text }}</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Blog" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "info": "Biarkan kosong untuk guna tajuk blog." },
+    { "type": "textarea", "id": "intro", "label": "Pengenalan (pilihan)" },
+    { "type": "range", "id": "articles_per_page", "label": "Artikel per halaman", "min": 4, "max": 16, "step": 2, "default": 6 },
+    { "type": "checkbox", "id": "show_date", "label": "Tunjuk tarikh", "default": true },
+    { "type": "text", "id": "date_format", "label": "Format tarikh", "default": "%d %B %Y" },
+    { "type": "text", "id": "read_more_label", "label": "Label pautan baca lagi", "default": "Baca lagi" },
+    { "type": "text", "id": "empty_text", "label": "Teks tiada artikel", "default": "Tiada artikel lagi." },
+    { "type": "header", "content": "Navigasi halaman" },
+    { "type": "text", "id": "pagination_label", "label": "Label navigasi (pembaca skrin)", "default": "Navigasi halaman" },
+    { "type": "text", "id": "prev_label", "label": "Label butang sebelum", "default": "Sebelum" },
+    { "type": "text", "id": "next_label", "label": "Label butang seterusnya", "default": "Seterusnya" },
+    { "type": "text", "id": "page_label", "label": "Label nombor halaman", "default": "Halaman" }
+  ],
+  "presets": [
+    { "name": "Blog" }
+  ]
+}
+{% endschema %}

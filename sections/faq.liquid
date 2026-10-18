@@ -1,0 +1,112 @@
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+
+    <div class="faq-wrap">
+      {%- comment -%}
+        Nested blocks: each "group" block owns its own "item" blocks. This is
+        the Shopify-native way to model a grouped FAQ - the merchant drags
+        questions into a group in the theme editor, and the markup has NO
+        conditional containers, so every div is statically balanced.
+      {%- endcomment -%}
+      {%- for group in section.blocks -%}
+        <div class="faq-group" data-reveal {{ group.shopify_attributes }}>
+          <div class="faq-group-title">{{ group.settings.title }}</div>
+
+          {%- for item in group.blocks -%}
+            <div class="faq-item" {{ item.shopify_attributes }}>
+              <button class="faq-q" id="faq-q-{{ item.id }}"
+                      aria-expanded="false" aria-controls="faq-a-{{ item.id }}">
+                {{ item.settings.question }}
+                <span class="faq-icon" aria-hidden="true"></span>
+              </button>
+              <div class="faq-a" id="faq-a-{{ item.id }}" role="region"
+                   aria-labelledby="faq-q-{{ item.id }}">
+                <div class="faq-a-inner">{{ item.settings.answer }}</div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Soalan Lazim",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Soalan Lazim" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "default": "Yang selalu ditanya." }
+  ],
+  "blocks": [
+    {
+      "type": "group",
+      "name": "Kumpulan",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Nama kumpulan", "default": "Proses" }
+      ],
+      "blocks": [
+        {
+          "type": "item",
+          "name": "Soalan",
+          "settings": [
+            { "type": "text", "id": "question", "label": "Soalan", "default": "Apa itu impression kit?" },
+            { "type": "richtext", "id": "answer", "label": "Jawapan", "default": "<p>Impression kit ialah set yang mengandungi dua buah foam tray.</p>" }
+          ]
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Soalan Lazim",
+      "blocks": [
+        {
+          "type": "group",
+          "settings": { "title": "Proses" },
+          "blocks": [
+            { "type": "item", "settings": { "question": "Apa itu impression kit?", "answer": "<p>Impression kit ialah set yang mengandungi dua buah foam tray. Anda tekan kaki ke dalam tray untuk mengambil bentuk kaki anda. Bentuk itu kami gunakan sebagai rujukan untuk menghasilkan insole custom anda.</p>" } },
+            { "type": "item", "settings": { "question": "Bagaimana cara buat imprint?", "answer": "<p>Buka foam tray, letak di atas permukaan keras, tekan kaki dengan berat badan penuh. Lebih kurang 5 minit. Panduan bergambar ada dalam kit.</p>" } },
+            { "type": "item", "settings": { "question": "Berapa lama kit sampai?", "answer": "<p>2–3 hari kerja dari tarikh pesanan dan pembayaran disahkan.</p>" } },
+            { "type": "item", "settings": { "question": "Bagaimana cara hantar balik kit?", "answer": "<p>Kit disertakan dengan airway bill prabayar. Hantar di pejabat pos terdekat. Tiada kos untuk anda.</p>" } },
+            { "type": "item", "settings": { "question": "Berapa lama insole siap?", "answer": "<p>12–18 hari kerja selepas kami terima impression kit anda. Kami maklumkan melalui WhatsApp atau email.</p>" } }
+          ]
+        },
+        {
+          "type": "group",
+          "settings": { "title": "Produk" },
+          "blocks": [
+            { "type": "item", "settings": { "question": "Apa beza antara kedua-dua produk?", "answer": "<p><strong>On My Feet All Day</strong> — untuk yang berdiri atau berjalan 4+ jam sehari. Sokongan lebih tegas.<br><br><strong>Normal Everyday Activity</strong> — untuk aktiviti harian 1–4 jam. Lebih ringan dan semula jadi.</p>" } },
+            { "type": "item", "settings": { "question": "Boleh pakai dengan semua jenis kasut?", "answer": "<p>Sesuai untuk kebanyakan kasut yang mempunyai ruang mencukupi — kasut sukan, kasut kerja, kasut harian. Untuk kasut yang sangat ketat, tanya kami di WhatsApp.</p>" } },
+            { "type": "item", "settings": { "question": "Berapa lama insole tahan?", "answer": "<p>Tempoh penggunaan bergantung pada kekerapan dan cara penggunaan. Kalau anda rasa sokongan mula berkurang, hubungi kami — kami boleh nilaikan keadaan insole anda.</p>" } }
+          ]
+        },
+        {
+          "type": "group",
+          "settings": { "title": "Jaminan" },
+          "blocks": [
+            { "type": "item", "settings": { "question": "Apa maksud 100 hari jaminan?", "answer": "<p>Dalam 100 hari pertama, kalau anda tidak berpuas hati, kami akan membaiki atau mengubah suai insole anda secara percuma. Ini bukan refund wang.</p>" } },
+            { "type": "item", "settings": { "question": "Apa perlu buat kalau tak puas hati?", "answer": "<p>WhatsApp kami di {{ settings.whatsapp_display }}. Beritahu nombor pesanan anda dan apa yang tidak kena.</p>" } }
+          ]
+        },
+        {
+          "type": "group",
+          "settings": { "title": "Penghantaran & Umum" },
+          "blocks": [
+            { "type": "item", "settings": { "question": "Ke mana sahaja penghantaran?", "answer": "<p>Buat masa ini, penghantaran dalam Malaysia sahaja.</p>" } },
+            { "type": "item", "settings": { "question": "Berapa lama keseluruhan proses?", "answer": "<p>Kira-kira 3–4 minggu dari tarikh pesanan: 2–3 hari kerja untuk kit sampai, masa anda buat imprint, masa penghantaran balik, dan 12–18 hari kerja untuk kami hasilkan insole.</p>" } },
+            { "type": "item", "settings": { "question": "Adakah InsoLab produk kesihatan?", "answer": "<p><strong>Tidak.</strong> InsoLab custom insoles adalah produk untuk keselesaan, sokongan dan fesyen custom. Produk ini tidak bertujuan untuk mendiagnosis, merawat atau menyembuhkan apa-apa penyakit. Untuk sebarang masalah kesihatan kaki, sila rujuk pakar perubatan.</p>" } },
+            { "type": "item", "settings": { "question": "Ada soalan lain?", "answer": "<p>WhatsApp kami di {{ settings.whatsapp_display }} — kami biasanya balas dalam masa sehari.</p>" } }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

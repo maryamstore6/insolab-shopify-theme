@@ -1,0 +1,141 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "InsoLab Cinematic",
+    "theme_version": "1.0.0",
+    "theme_author": "InsoLab",
+    "theme_documentation_url": "https://insolab.example.com/docs",
+    "theme_support_url": "https://wa.me/60176055349"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Colours"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink (primary)",
+        "default": "#0B3D91",
+        "info": "Main brand navy for text and headings."
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent (teal)",
+        "default": "#00B3B8",
+        "info": "Primary teal for buttons and highlights."
+      },
+      {
+        "type": "color",
+        "id": "color_accent_deep",
+        "label": "Accent deep",
+        "default": "#00777C",
+        "info": "Darker teal for hover states and depth."
+      },
+      {
+        "type": "color",
+        "id": "color_accent_soft",
+        "label": "Accent soft",
+        "default": "#E8F4F4",
+        "info": "Pale teal for subtle backgrounds."
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "Paper",
+        "default": "#F5F3EE",
+        "info": "Warm off-white page background."
+      },
+      {
+        "type": "header",
+        "content": "Typography"
+      },
+      {
+        "type": "select",
+        "id": "font_display",
+        "label": "Display font",
+        "options": [
+          {
+            "value": "Playfair Display",
+            "label": "Playfair Display"
+          },
+          {
+            "value": "Georgia",
+            "label": "Georgia"
+          },
+          {
+            "value": "Times New Roman",
+            "label": "Times New Roman"
+          }
+        ],
+        "default": "Playfair Display",
+        "info": "Serif display face for headlines."
+      },
+      {
+        "type": "select",
+        "id": "font_body",
+        "label": "Body font",
+        "options": [
+          {
+            "value": "Source Sans 3",
+            "label": "Source Sans 3"
+          },
+          {
+            "value": "Segoe UI",
+            "label": "Segoe UI"
+          },
+          {
+            "value": "system-ui",
+            "label": "system-ui"
+          }
+        ],
+        "default": "Source Sans 3",
+        "info": "Sans-serif body face for paragraphs and UI."
+      },
+      {
+        "type": "header",
+        "content": "Contact"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "WhatsApp number",
+        "default": "60176055349",
+        "info": "International format, digits only. Displayed number: 017-605 5349."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_display",
+        "label": "WhatsApp display number",
+        "default": "017-605 5349",
+        "info": "Shown in body copy (FAQ answers). The wa.me link uses the digits-only number above."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_label",
+        "label": "WhatsApp label",
+        "default": "WhatsApp",
+        "info": "Button text shown next to the WhatsApp icon."
+      },
+      {
+        "type": "header",
+        "content": "Branding"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32x32 or 64x64 PNG recommended."
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Share image",
+        "info": "1200x630 social preview image used for Open Graph sharing."
+      }
+    ]
+  }
+]

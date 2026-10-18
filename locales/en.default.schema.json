@@ -1,0 +1,35 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "refresh_page": "Choosing a selection results in a full page refresh."
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "search": "Search",
+      "reset": "Clear search"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "404"
+    },
+    "password_page": {
+      "login_form_heading": "Enter store using password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter",
+      "login_form_error": "Wrong password. Please try again.",
+      "opening_soon": "Opening soon"
+    }
+  },
+  "sections": {}
+}

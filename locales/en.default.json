@@ -1,0 +1,93 @@
+{
+  "cart": {
+    "general": {
+      "title": "Troli",
+      "product": "Produk",
+      "price": "Harga",
+      "quantity": "Kuantiti",
+      "total": "Jumlah",
+      "update": "Kemas kini",
+      "checkout": "Bayar sekarang",
+      "empty": "Troli anda kosong",
+      "remove": "Buang",
+      "note": "Nota pesanan"
+    }
+  },
+  "general": {
+    "menu": "Menu",
+    "close": "Tutup",
+    "search": "Cari",
+    "gift_card": {
+      "title": "Kad Hadiah",
+      "expired": "Kad ini telah tamat tempoh.",
+      "expires_on": "Tamat tempoh",
+      "initial_value": "Nilai asal",
+      "code_label": "Kod Kad Hadiah",
+      "instruction": "Tunjuk kod ini atau imbas kod QR semasa membuat pembayaran.",
+      "print": "Cetak",
+      "apple_wallet": "Simpan ke Apple Wallet"
+    },
+    "password_page": {
+      "opening_soon": "Kedai ini akan dibuka tidak lama lagi.",
+      "label": "Kata laluan",
+      "placeholder": "Kata laluan anda",
+      "thanks": "Terima kasih kerana menunggu. Kami akan membuka tidak lama lagi.",
+      "login_form_heading": "Masuk",
+      "login_form_password": "Kata laluan",
+      "login_form_submit": "Masuk",
+      "login_form_forgot": "Lupa kata laluan?"
+    },
+    "meta": {
+      "title": "InsoLab",
+      "description": "Custom insoles dibuat ikut acuan kaki anda sendiri."
+    },
+    "pagination": {
+      "previous": "Sebelumnya",
+      "next": "Seterusnya",
+      "page": "Halaman"
+    },
+    "accessibility": {
+      "skip_to_content": "Langkau ke kandungan",
+      "loading": "Memuatkan"
+    }
+  },
+  "products": {
+    "product": {
+      "title": "Produk",
+      "price": "Harga",
+      "sold_out": "Habis dijual",
+      "per_unit": "/ unit",
+      "add_to_cart": "Tambah ke troli",
+      "description": "Penerangan",
+      "related_products": "Produk berkaitan",
+      "vendor": "Penjual",
+      "type": "Jenis",
+      "tags": "Tag"
+    }
+  },
+  "collections": {
+    "general": {
+      "all_products": "Semua produk",
+      "previous": "Sebelumnya",
+      "next": "Seterusnya",
+      "empty": "Tiada produk ditemui",
+      "sort_by": "Isih mengikut",
+      "sort_featured": "Pilihan",
+      "sort_price_asc": "Harga: Rendah ke Tinggi",
+      "sort_price_desc": "Harga: Tinggi ke Rendah",
+      "sort_alpha_asc": "A ke Z",
+      "sort_alpha_desc": "Z ke A",
+      "sort_date_desc": "Tarikh: Baharu ke Lama",
+      "sort_date_asc": "Tarikh: Lama ke Baharu"
+    }
+  },
+  "search": {
+    "general": {
+      "title": "Cari",
+      "placeholder": "Cari produk",
+      "submit": "Cari",
+      "no_results": "Tiada hasil ditemui untuk",
+      "results_for": "Hasil untuk"
+    }
+  }
+}

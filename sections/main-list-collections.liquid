@@ -1,0 +1,90 @@
+<section class="section">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h1>{{ section.settings.heading }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="lead">{{ section.settings.intro }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- paginate collections by 24 -%}
+      {%- if collections.size > 0 -%}
+        <div class="product-grid" data-reveal-group>
+          {%- for collection in collections -%}
+            <article class="product-card" data-reveal>
+              {%- if collection.image -%}
+                <div class="product-media">
+                  <a href="{{ collection.url }}" tabindex="-1" aria-hidden="true">
+                    <img src="{{ collection.image | image_url: width: 640 }}"
+                         srcset="{{ collection.image | image_url: width: 320 }} 320w,
+                                 {{ collection.image | image_url: width: 640 }} 640w,
+                                 {{ collection.image | image_url: width: 960 }} 960w"
+                         sizes="(max-width: 900px) 92vw, 40vw"
+                         alt="{{ collection.image.alt | default: collection.title | escape }}"
+                         class="product-art" width="640" height="640"
+                         loading="lazy" decoding="async">
+                  </a>
+                </div>
+              {%- endif -%}
+
+              <div class="product-body">
+                <h2 class="product-name"><a href="{{ collection.url }}">{{ collection.title }}</a></h2>
+
+                {%- if section.settings.show_description and collection.description != blank -%}
+                  <p class="product-desc">{{ collection.description | strip_html | truncate: 140 }}</p>
+                {%- endif -%}
+
+                <p class="product-desc">{{ collection.all_products_count }} {{ section.settings.count_label }}</p>
+
+                <div class="product-foot">
+                  <a class="btn btn--ghost" href="{{ collection.url }}">{{ section.settings.view_label }}</a>
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="hero-actions" style="margin-top:var(--s-4)"
+               aria-label="{{ section.settings.pagination_label }}">
+            {%- if paginate.previous -%}
+              <a class="btn btn--ghost" href="{{ paginate.previous.url }}">{{ section.settings.prev_label }}</a>
+            {%- endif -%}
+            <span class="product-desc">{{ section.settings.page_label }} {{ paginate.current_page }} / {{ paginate.pages }}</span>
+            {%- if paginate.next -%}
+              <a class="btn btn--ghost" href="{{ paginate.next.url }}">{{ section.settings.next_label }}</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- else -%}
+        <p class="lead" role="status">{{ section.settings.empty_text }}</p>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Senarai koleksi",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Label kecil", "default": "Koleksi" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "default": "Semua Koleksi" },
+    { "type": "textarea", "id": "intro", "label": "Pengenalan (pilihan)" },
+    { "type": "checkbox", "id": "show_description", "label": "Tunjuk penerangan koleksi", "default": false },
+    { "type": "text", "id": "count_label", "label": "Label bilangan produk", "default": "produk" },
+    { "type": "text", "id": "view_label", "label": "Label butang koleksi", "default": "Lihat koleksi" },
+    { "type": "text", "id": "empty_text", "label": "Teks tiada koleksi", "default": "Tiada koleksi untuk dipaparkan." },
+    { "type": "header", "content": "Navigasi halaman" },
+    { "type": "text", "id": "pagination_label", "label": "Label navigasi (pembaca skrin)", "default": "Navigasi halaman" },
+    { "type": "text", "id": "prev_label", "label": "Label butang sebelum", "default": "Sebelum" },
+    { "type": "text", "id": "next_label", "label": "Label butang seterusnya", "default": "Seterusnya" },
+    { "type": "text", "id": "page_label", "label": "Label nombor halaman", "default": "Halaman" }
+  ],
+  "presets": [
+    { "name": "Senarai koleksi" }
+  ]
+}
+{% endschema %}
