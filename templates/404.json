@@ -19,21 +19,12 @@
         "subheading": "Setiap pasang dibuat mengikut bentuk kaki anda sendiri. Order dari rumah, kami uruskan selebihnya.",
         "cta_label": "Order Sekarang — RM599",
         "cta_url": "",
-        "cta2_label": "Cara Ia Berfungsi",
+        "cta2_label": "",
         "cta2_url": "",
         "visual_alt": "InsoLab — insole custom dengan zon sokongan dan kit acuan kaki",
         "visual_caption": "Custom Insole — Zon Sokongan",
         "show_scroll_hint": true,
         "scroll_hint": "Scroll"
-      }
-    },
-    "main": {
-      "type": "404",
-      "settings": {
-        "eyebrow": "404",
-        "heading": "Halaman tidak dijumpai.",
-        "body": "Pautan yang anda ikuti mungkin sudah dipadam atau dialihkan. Semak sekali lagi, atau kembali ke laman utama.",
-        "cta_label": "Kembali ke Utama"
       }
     },
     "marquee_njBYPy": {
@@ -80,6 +71,15 @@
       "name": "Marquee",
       "settings": {
         "items": "Impression Kit Percuma, Return Postage Ditanggung, Dibuat Khas Untuk Anda, 100 Hari Jaminan, Seluruh Malaysia"
+      }
+    },
+    "main": {
+      "type": "404",
+      "settings": {
+        "eyebrow": "404",
+        "heading": "Halaman tidak dijumpai.",
+        "body": "Pautan yang anda ikuti mungkin sudah dipadam atau dialihkan. Semak sekali lagi, atau kembali ke laman utama.",
+        "cta_label": "Kembali ke Utama"
       }
     }
   },
