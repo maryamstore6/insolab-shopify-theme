@@ -216,6 +216,56 @@
         "eyebrow": "Pengalaman",
         "heading": "Apa kata mereka."
       }
+    },
+    "main_product_ycr6ic": {
+      "type": "main-product",
+      "name": "Borang pesanan + buy box",
+      "settings": {
+        "eyebrow": "Order",
+        "heading": "Mula dengan impression kit.",
+        "variant_label": "Pilih pakej",
+        "show_customer_fields": true,
+        "name_label": "Nama Penuh *",
+        "phone_label": "No. Telefon *",
+        "name_placeholder": "Seperti dalam kad pengenalan",
+        "phone_placeholder": "01X-XXX XXXX",
+        "email_label": "Email",
+        "email_placeholder": "nama@email.com",
+        "addr_label": "Alamat Penghantaran",
+        "addr_placeholder": "No. rumah, jalan",
+        "city_label": "Bandar",
+        "city_placeholder": "Bandar",
+        "state_label": "Negeri",
+        "state_placeholder": "Negeri",
+        "post_label": "Poskod",
+        "post_placeholder": "XXXXX",
+        "notes_label": "Nota (pilihan)",
+        "notes_placeholder": "Ada apa-apa kami perlu tahu?",
+        "note": "Dengan membuat pesanan, anda bersetuju dengan terma kami. InsoLab custom insoles adalah produk untuk keselesaan dan sokongan — bukan alat perubatan.",
+        "picker_title": "Pilih Pakej Anda",
+        "picker_sub": "Makin banyak, makin jimat.",
+        "pick_collection": "",
+        "pick_default": 3,
+        "badge_text": "PALING JIMAT",
+        "no_collection_text": "Pilih koleksi pakej dalam tetapan seksyen ini.",
+        "qty_label": "Kuantiti",
+        "qty_minus_label": "Kurangkan kuantiti",
+        "qty_plus_label": "Tambah kuantiti",
+        "cta_label": "Tambah ke Troli",
+        "ship_note": "Penghantaran percuma — kami tanggung kos pos kit dan penghantaran balik",
+        "urgency": "Kit dipos dalam 2–3 hari kerja",
+        "secure": "Pembayaran selamat melalui Shopify"
+      }
+    },
+    "cta_TcVYGN": {
+      "type": "cta",
+      "name": "CTA akhir",
+      "settings": {
+        "heading": "Sedia untuk lebih selesa?",
+        "body": "Order hari ini. Impression kit sampai dalam 2–3 hari kerja.",
+        "cta_label": "Order Sekarang",
+        "cta_url": "shopify://collections/all"
+      }
     }
   },
   "order": [
@@ -224,6 +274,8 @@
     "split_video_a8Nd8E",
     "split_video_t4c6R6",
     "process_m7UeQP",
-    "testimonials_X8RVi6"
+    "testimonials_X8RVi6",
+    "main_product_ycr6ic",
+    "cta_TcVYGN"
   ]
 }
