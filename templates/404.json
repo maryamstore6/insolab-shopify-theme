@@ -103,15 +103,6 @@
         "video_alt": "Teknik menekan kaki ke foam tray untuk mengambil bentuk kaki"
       }
     },
-    "main": {
-      "type": "404",
-      "settings": {
-        "eyebrow": "404",
-        "heading": "Halaman tidak dijumpai.",
-        "body": "Pautan yang anda ikuti mungkin sudah dipadam atau dialihkan. Semak sekali lagi, atau kembali ke laman utama.",
-        "cta_label": "Kembali ke Utama"
-      }
-    },
     "testimonials_X8RVi6": {
       "type": "testimonials",
       "blocks": {
@@ -150,6 +141,81 @@
         "eyebrow": "Pengalaman",
         "heading": "Apa kata mereka. Faisal - Melaka"
       }
+    },
+    "process_m7UeQP": {
+      "type": "process",
+      "blocks": {
+        "step_f96kPk": {
+          "type": "step",
+          "settings": {
+            "name": "Order",
+            "description": "Pilih produk, buat pesanan. Kami WhatsApp untuk pengesahan bayaran.",
+            "time": "",
+            "icon": "process-01-order.svg"
+          }
+        },
+        "step_d4jwfP": {
+          "type": "step",
+          "settings": {
+            "name": "Impression Kit",
+            "description": "Kit sampai ke rumah — foam tray dan panduan bergambar.",
+            "time": "2–3 hari kerja",
+            "icon": "process-02-kit.svg"
+          }
+        },
+        "step_D3HFkA": {
+          "type": "step",
+          "settings": {
+            "name": "Imprint",
+            "description": "Tekan kaki ke foam tray. Lebih kurang 5 minit.",
+            "time": "",
+            "icon": "process-03-imprint.svg"
+          }
+        },
+        "step_FPa9wh": {
+          "type": "step",
+          "settings": {
+            "name": "Hantar Balik",
+            "description": "Guna airway bill prabayar kami. Tiada kos.",
+            "time": "Postage percuma",
+            "icon": "process-04-return.svg"
+          }
+        },
+        "step_BBpJeF": {
+          "type": "step",
+          "settings": {
+            "name": "Kami Hasilkan",
+            "description": "Kami hasilkan insole ikut bentuk kaki anda.",
+            "time": "12–18 hari kerja",
+            "icon": "process-05-make.svg"
+          }
+        },
+        "step_na9aTw": {
+          "type": "step",
+          "settings": {
+            "name": "Sampai Ke Rumah",
+            "description": "Insole sampai ke rumah. Kami maklumkan bila ia dihantar.",
+            "time": "Seluruh Malaysia",
+            "icon": "process-06-delivery.svg"
+          }
+        }
+      },
+      "block_order": [
+        "step_f96kPk",
+        "step_d4jwfP",
+        "step_D3HFkA",
+        "step_FPa9wh",
+        "step_BBpJeF",
+        "step_na9aTw"
+      ],
+      "name": "Proses",
+      "settings": {
+        "eyebrow": "Proses",
+        "heading": "Enam langkah. Satu insole.",
+        "image_alt": "Enam langkah proses InsoLab",
+        "caption": "Daripada acuan kaki hingga insole siap — semua di bengkel kami.",
+        "show_fallback": true
+      }
     }
   },
   "order": [
@@ -157,7 +223,7 @@
     "marquee_njBYPy",
     "split_video_a8Nd8E",
     "split_video_t4c6R6",
-    "main",
+    "process_m7UeQP",
     "testimonials_X8RVi6"
   ]
 }
