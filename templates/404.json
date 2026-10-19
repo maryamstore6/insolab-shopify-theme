@@ -1,6 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "name": "404",
   "sections": {
+    "hero_PVfz79": {
+      "type": "hero",
+      "name": "Hero",
+      "settings": {
+        "eyebrow": "Custom Insoles Specialist · Malaysia",
+        "heading": "Pakar Custom Insoles.",
+        "heading_accent": "Khas Untuk Anda.",
+        "subheading": "Setiap pasang dibuat mengikut bentuk kaki anda sendiri. Order dari rumah, kami uruskan selebihnya.",
+        "cta_label": "Order Sekarang — RM599",
+        "cta_url": "",
+        "cta2_label": "Cara Ia Berfungsi",
+        "cta2_url": "",
+        "visual_alt": "InsoLab — insole custom dengan zon sokongan dan kit acuan kaki",
+        "visual_caption": "Custom Insole — Zon Sokongan",
+        "show_scroll_hint": true,
+        "scroll_hint": "Scroll"
+      }
+    },
     "main": {
       "type": "404",
       "settings": {
@@ -9,9 +35,57 @@
         "body": "Pautan yang anda ikuti mungkin sudah dipadam atau dialihkan. Semak sekali lagi, atau kembali ke laman utama.",
         "cta_label": "Kembali ke Utama"
       }
+    },
+    "marquee_njBYPy": {
+      "type": "marquee",
+      "blocks": {
+        "item_bdnTrD": {
+          "type": "item",
+          "settings": {
+            "text": "Impression Kit Percuma"
+          }
+        },
+        "item_tqiyTT": {
+          "type": "item",
+          "settings": {
+            "text": "Return Postage Ditanggung"
+          }
+        },
+        "item_NcqpYf": {
+          "type": "item",
+          "settings": {
+            "text": "Dibuat Khas Untuk Anda"
+          }
+        },
+        "item_Grgcw6": {
+          "type": "item",
+          "settings": {
+            "text": "100 Hari Jaminan"
+          }
+        },
+        "item_YRhpq3": {
+          "type": "item",
+          "settings": {
+            "text": "Seluruh Malaysia"
+          }
+        }
+      },
+      "block_order": [
+        "item_bdnTrD",
+        "item_tqiyTT",
+        "item_NcqpYf",
+        "item_Grgcw6",
+        "item_YRhpq3"
+      ],
+      "name": "Marquee",
+      "settings": {
+        "items": "Impression Kit Percuma, Return Postage Ditanggung, Dibuat Khas Untuk Anda, 100 Hari Jaminan, Seluruh Malaysia"
+      }
     }
   },
   "order": [
+    "hero_PVfz79",
+    "marquee_njBYPy",
     "main"
   ]
 }
