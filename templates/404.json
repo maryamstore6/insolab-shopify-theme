@@ -81,11 +81,27 @@
         "body": "Pautan yang anda ikuti mungkin sudah dipadam atau dialihkan. Semak sekali lagi, atau kembali ke laman utama.",
         "cta_label": "Kembali ke Utama"
       }
+    },
+    "split_video_a8Nd8E": {
+      "type": "split-video",
+      "name": "Split (video + teks)",
+      "settings": {
+        "eyebrow": "100% Dari Rumah",
+        "heading": "Tiada temujanji. Tiada menunggu. Tiada ke mana-mana.",
+        "body": "Kami pos impression kit ke rumah anda. Tekan kaki ke foam tray ikut panduan bergambar — 5 minit sahaja. Hantar balik guna airway bill kami. Postage kami tanggung.",
+        "cta_label": "Soalan Lazim",
+        "cta_url": "",
+        "flip": false,
+        "video_url": "",
+        "bundled_video": "guide",
+        "video_alt": "Teknik menekan kaki ke foam tray untuk mengambil bentuk kaki"
+      }
     }
   },
   "order": [
     "hero_PVfz79",
     "marquee_njBYPy",
+    "split_video_a8Nd8E",
     "main"
   ]
 }
