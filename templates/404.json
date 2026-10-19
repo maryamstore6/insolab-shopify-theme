@@ -103,45 +103,6 @@
         "video_alt": "Teknik menekan kaki ke foam tray untuk mengambil bentuk kaki"
       }
     },
-    "testimonials_X8RVi6": {
-      "type": "testimonials",
-      "blocks": {
-        "quote_L3B9LV": {
-          "type": "quote",
-          "settings": {
-            "quote": "Kerja saya berdiri 8 jam sehari. Lepas pakai ni, kaki tak penat macam dulu.",
-            "name": "Ahmad R.",
-            "product": "On My Feet All Day"
-          }
-        },
-        "quote_8WdcVM": {
-          "type": "quote",
-          "settings": {
-            "quote": "Prosesnya senang. Buat imprint di rumah, hantar balik. Tak perlu pergi mana-mana.",
-            "name": "Siti N.",
-            "product": "Normal Everyday Activity"
-          }
-        },
-        "quote_UnU3j7": {
-          "type": "quote",
-          "settings": {
-            "quote": "Ambil 2 unit untuk saya dan suami. Harga berbaloi, selesa dipakai.",
-            "name": "Lim W.",
-            "product": "2 Unit Package"
-          }
-        }
-      },
-      "block_order": [
-        "quote_L3B9LV",
-        "quote_8WdcVM",
-        "quote_UnU3j7"
-      ],
-      "name": "Testimoni",
-      "settings": {
-        "eyebrow": "Pengalaman",
-        "heading": "Apa kata mereka. Faisal - Melaka"
-      }
-    },
     "process_m7UeQP": {
       "type": "process",
       "blocks": {
@@ -215,6 +176,45 @@
         "image_alt": "Enam langkah proses InsoLab",
         "caption": "Daripada acuan kaki hingga insole siap — semua di bengkel kami.",
         "show_fallback": true
+      }
+    },
+    "testimonials_X8RVi6": {
+      "type": "testimonials",
+      "blocks": {
+        "quote_L3B9LV": {
+          "type": "quote",
+          "settings": {
+            "quote": "Kerja saya berdiri 8 jam sehari. Lepas pakai ni, kaki tak penat macam dulu.",
+            "name": "Ahmad R.",
+            "product": "On My Feet All Day"
+          }
+        },
+        "quote_8WdcVM": {
+          "type": "quote",
+          "settings": {
+            "quote": "Prosesnya senang. Buat imprint di rumah, hantar balik. Tak perlu pergi mana-mana.",
+            "name": "Siti N.",
+            "product": "Normal Everyday Activity"
+          }
+        },
+        "quote_UnU3j7": {
+          "type": "quote",
+          "settings": {
+            "quote": "Ambil 2 unit untuk saya dan suami. Harga berbaloi, selesa dipakai.",
+            "name": "Lim W.",
+            "product": "2 Unit Package"
+          }
+        }
+      },
+      "block_order": [
+        "quote_L3B9LV",
+        "quote_8WdcVM",
+        "quote_UnU3j7"
+      ],
+      "name": "Testimoni",
+      "settings": {
+        "eyebrow": "Pengalaman",
+        "heading": "Apa kata mereka."
       }
     }
   },
