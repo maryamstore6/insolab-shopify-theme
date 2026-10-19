@@ -73,15 +73,6 @@
         "items": "Impression Kit Percuma, Return Postage Ditanggung, Dibuat Khas Untuk Anda, 100 Hari Jaminan, Seluruh Malaysia"
       }
     },
-    "main": {
-      "type": "404",
-      "settings": {
-        "eyebrow": "404",
-        "heading": "Halaman tidak dijumpai.",
-        "body": "Pautan yang anda ikuti mungkin sudah dipadam atau dialihkan. Semak sekali lagi, atau kembali ke laman utama.",
-        "cta_label": "Kembali ke Utama"
-      }
-    },
     "split_video_a8Nd8E": {
       "type": "split-video",
       "name": "Split (video + teks)",
@@ -96,12 +87,37 @@
         "bundled_video": "guide",
         "video_alt": "Teknik menekan kaki ke foam tray untuk mengambil bentuk kaki"
       }
+    },
+    "split_video_t4c6R6": {
+      "type": "split-video",
+      "name": "Split (video + teks)",
+      "settings": {
+        "eyebrow": "100% Dari Rumah",
+        "heading": "Dibuat mengikut bentuk kaki anda — bukan mengikut saiz kasut.",
+        "body": "Insole pasaran dibuat ikut \"saiz\". Tapi setiap orang berjalan dengan cara berbeza. Jadi anda ambil bentuk kaki sendiri di rumah, kami hasilkan ikut bentuk itu.",
+        "cta_label": "Soalan Lazim",
+        "cta_url": "",
+        "flip": true,
+        "video_url": "",
+        "bundled_video": "adult",
+        "video_alt": "Teknik menekan kaki ke foam tray untuk mengambil bentuk kaki"
+      }
+    },
+    "main": {
+      "type": "404",
+      "settings": {
+        "eyebrow": "404",
+        "heading": "Halaman tidak dijumpai.",
+        "body": "Pautan yang anda ikuti mungkin sudah dipadam atau dialihkan. Semak sekali lagi, atau kembali ke laman utama.",
+        "cta_label": "Kembali ke Utama"
+      }
     }
   },
   "order": [
     "hero_PVfz79",
     "marquee_njBYPy",
     "split_video_a8Nd8E",
+    "split_video_t4c6R6",
     "main"
   ]
 }
