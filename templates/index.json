@@ -59,10 +59,136 @@
         "subheading": "Jawab 4 soalan ringkas — kami cadangkan pakej yang paling padan dengan kaki anda.",
         "order_url": "#order"
       }
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {
+        "items": "Impression Kit Percuma, Return Postage Ditanggung, Dibuat Khas Untuk Anda, 100 Hari Jaminan, Seluruh Malaysia"
+      },
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "text": "Impression Kit Percuma"
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "text": "Return Postage Ditanggung"
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "text": "Dibuat Khas Untuk Anda"
+          }
+        },
+        "item-4": {
+          "type": "item",
+          "settings": {
+            "text": "100 Hari Jaminan"
+          }
+        },
+        "item-5": {
+          "type": "item",
+          "settings": {
+            "text": "Seluruh Malaysia"
+          }
+        }
+      }
+    },
+    "kenapa": {
+      "type": "kenapa",
+      "settings": {
+        "eyebrow": "Kenapa InsoLab",
+        "heading": "Setiap kaki itu berbeza.",
+        "body": "Tiada dua kaki yang sama. Lengkok, lebar dan cara anda menapak — semuanya berbeza antara satu orang dengan yang lain. Insole yang sesuai untuk orang lain belum tentu sesuai untuk anda. Sebab itu acuan kaki anda sendiri yang jadi panduan kami.",
+        "cta_label": "Lihat Produk",
+        "cta_url": "#products",
+        "image": "",
+        "image_alt": "Tiga jenis bentuk kaki — normal, flat dan high arch",
+        "caption": "Normal, flat atau high arch — setiap bentuk perlukan sokongan yang berbeza."
+      }
+    },
+    "products": {
+      "type": "products",
+      "settings": {
+        "eyebrow": "Produk",
+        "heading": "Dua pilihan. Dua cara hidup.",
+        "collection": "",
+        "limit": 2,
+        "cta_label": "Order",
+        "badge_tag": "heavy",
+        "badge_text": "Aktivitas Berat",
+        "bundle_heading": "Ambil dua — RM1099 untuk 2 unit.",
+        "bundle_body": "Jimat RM99 berbanding beli satu-satu.",
+        "bundle_cta": "Order 2 Unit — RM1099",
+        "bundle_url": "#order"
+      },
+      "blocks": {
+        "fallback-1": {
+          "type": "fallback",
+          "settings": {
+            "name": "On My Feet All Day",
+            "badge": "Aktiviti Berat",
+            "description": "Untuk yang berdiri atau berjalan 4+ jam sehari. Sokongan lebih tegas.",
+            "price": "RM599",
+            "fallback_art": "insole-support.svg"
+          }
+        },
+        "fallback-2": {
+          "type": "fallback",
+          "settings": {
+            "name": "Normal Everyday Activity",
+            "badge": "Aktiviti Harian",
+            "description": "Untuk aktiviti harian 1–4 jam. Lebih ringan dan semula jadi.",
+            "price": "RM599",
+            "fallback_art": "insole-everyday.svg"
+          }
+        }
+      }
+    },
+    "split-video-1": {
+      "type": "split-video",
+      "settings": {
+        "eyebrow": "Kenapa InsoLab",
+        "heading": "Dibuat mengikut bentuk kaki anda — bukan mengikut saiz kasut.",
+        "body": "Insole pasaran dibuat ikut \"saiz\". Tapi setiap orang berjalan dengan cara berbeza. Jadi anda ambil bentuk kaki sendiri di rumah, kami hasilkan ikut bentuk itu.",
+        "cta_label": "Lihat Produk",
+        "cta_url": "#products",
+        "flip": false,
+        "video": "",
+        "video_url": "",
+        "bundled_video": "guide",
+        "poster": "",
+        "video_alt": "Teknik menekan kaki ke foam tray untuk mengambil bentuk kaki"
+      }
+    },
+    "split-video-2": {
+      "type": "split-video",
+      "settings": {
+        "eyebrow": "100% Dari Rumah",
+        "heading": "Tiada temujanji. Tiada menunggu. Tiada ke mana-mana.",
+        "body": "Kami pos impression kit ke rumah anda. Tekan kaki ke foam tray ikut panduan bergambar — 5 minit sahaja. Hantar balik guna airway bill kami. Postage kami tanggung.",
+        "cta_label": "Soalan Lazim",
+        "cta_url": "#faq",
+        "flip": true,
+        "video": "",
+        "video_url": "",
+        "bundled_video": "adult",
+        "poster": "",
+        "video_alt": "Pelanggan membuat imprint kaki sendiri di rumah"
+      }
     }
   },
   "order": [
     "hero",
-    "quiz"
+    "quiz",
+    "marquee",
+    "kenapa",
+    "products",
+    "split-video-1",
+    "split-video-2"
   ]
 }
