@@ -23,3 +23,8 @@
 .ftr-base{display:flex;flex-wrap:wrap;gap:var(--s-2);justify-content:space-between;margin-top:var(--s-3);font-size:var(--t-micro);color:var(--ink-muted)}
 @media (max-width:1024px){.ftr-top{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){.ftr-top{grid-template-columns:1fr}.cart-table thead{display:none}.cart-table td{display:block;border:0;padding:0.25rem 0}}
+
+/* Nombor kedudukan section — HANYA dalam editor tema Shopify.
+   Dilumpuhkan pada storefront supaya pelanggan tidak nampak. */
+.section-order-badge{display:none}
+.theme-editor .section-order-badge{display:inline-block;background:#0B3D91;color:#fff;font:700 11px/1 system-ui,sans-serif;padding:5px 9px;border-radius:0 0 8px 0;letter-spacing:.06em;margin:0 0 .5rem}

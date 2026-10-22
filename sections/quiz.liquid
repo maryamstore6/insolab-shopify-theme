@@ -19,6 +19,7 @@
          data-quiz-bundle-price="{{ section.settings.bundle_price | default: '1099' }}"
          data-quiz-tier-active="{{ section.settings.tier_active_name | default: 'On My Feet All Day' | escape }}"
          data-quiz-tier-normal="{{ section.settings.tier_normal_name | default: 'Normal Everyday Activity' | escape }}">
+<span class="section-order-badge" aria-hidden="true">02</span>
   <div class="wrap">
     <div class="quiz-head section-head" data-reveal>
       {%- if section.settings.eyebrow != blank -%}
@@ -174,7 +175,7 @@
 
 {% schema %}
 {
-  "name": "Kuiz keselesaan kaki",
+  "name": "02 · Kuiz keselesaan kaki",
   "settings": [
     { "type": "header", "content": "Tajuk" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Kuiz kaki" },

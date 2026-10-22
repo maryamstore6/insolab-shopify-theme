@@ -420,6 +420,13 @@
     // buang di sini sekiranya markup cache masih membawanya.
     document.body.classList.remove('is-loading');
 
+    // Mod editor tema Shopify: iframe editor membawa preview_theme_id.
+    // Kelas ini membolehkan lencana nombor section dipapar dalam kanvas editor,
+    // manakala CSS memastikannya tersembunyi pada storefront.
+    if (/[?&]preview_theme_id=/.test(window.location.search)) {
+      document.documentElement.classList.add('theme-editor');
+    }
+
     if (prefersReduced) document.documentElement.classList.add('no-motion');
 
     if (typeof gsap !== 'undefined') {
