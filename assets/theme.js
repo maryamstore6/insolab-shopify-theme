@@ -120,6 +120,14 @@
 
     if (closeBtn) closeBtn.addEventListener('click', closeNav);
 
+    // Ketik di luar pautan dalam overlay = tutup. Tanpa ini, pengguna yang
+    // mengetik ruang kosong terperangkap dalam menu (body.nav-open dikunci).
+    nav.addEventListener('click', (ev) => {
+      if (!nav.classList.contains('is-open')) return;
+      if (ev.target.closest('a, button')) return;
+      closeNav();
+    });
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
     });
@@ -380,9 +388,38 @@
   }
 
   /* ---------------------------------------------------------
+     7b. PAUTAN PESANAN (#order)
+
+     Seksyen pesanan menggunakan id "order-<section.id>", jadi anchor
+     "#order" dalam tetapan tema menunjuk ke tempat kosong. Selesaikan
+     ke borang produk sebenar supaya butang utama tidak mati.
+     --------------------------------------------------------- */
+  function initOrderAnchor() {
+    document.addEventListener('click', (ev) => {
+      const link = ev.target.closest('a[href="#order"]');
+      if (!link) return;
+      if (document.getElementById('order')) return; // anchor memang wujud
+
+      const form = document.querySelector('.order-form');
+      const target = form ? (form.closest('section') || form) : null;
+      if (!target) return;
+
+      ev.preventDefault();
+      target.setAttribute('tabindex', '-1');
+      target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+      target.focus({ preventScroll: true });
+    });
+  }
+
+  /* ---------------------------------------------------------
      8. BOOT
      --------------------------------------------------------- */
   function boot() {
+    // Keselamatan: kelas is-loading (overflow:hidden; height:100vh) mengunci
+    // skrol sentuh pada telefon. Ia tiada preloader untuk membuangnya, jadi
+    // buang di sini sekiranya markup cache masih membawanya.
+    document.body.classList.remove('is-loading');
+
     if (prefersReduced) document.documentElement.classList.add('no-motion');
 
     if (typeof gsap !== 'undefined') {
@@ -393,6 +430,7 @@
 
     initChrome();
     initNav();
+    initOrderAnchor();
     initAnchors();
     initFaq();
     initFilms();
