@@ -1,0 +1,227 @@
+{%- comment -%}
+  QUIZ — kuiz keselesaan kaki (4 soalan → syor produk).
+
+  Aliran: 4 soalan berperingkat → hasil (produk + bilangan unit).
+  - Pilihan soalan diisi sebagai senarai "Label | skor" (satu baris satu pilihan)
+    supaya bilangan tetapan kekal di bawah had 40 Shopify.
+  - Tanpa JS: semua soalan dipaparkan serentak; butang WhatsApp kekal berfungsi.
+  - Jawapan disimpan ke borang pesanan (line item properties) supaya pembuat
+    insole nampak keadaan kaki pelanggan pada pesanan Shopify.
+  - Nada formal, tanpa klaim perubatan (bukan peranti MDA).
+{%- endcomment -%}
+
+{%- assign wa = section.settings.wa_number | default: settings.whatsapp_number | default: '60176055349' -%}
+{%- assign wa_digits = wa | remove: '-' | remove: ' ' | remove: '+' -%}
+
+<section class="section quiz-section" id="quiz-{{ section.id }}" data-quiz
+         data-quiz-wa="{{ wa_digits }}"
+         data-quiz-unit-price="{{ section.settings.unit_price | default: '599' }}"
+         data-quiz-bundle-price="{{ section.settings.bundle_price | default: '1099' }}"
+         data-quiz-tier-active="{{ section.settings.tier_active_name | default: 'On My Feet All Day' | escape }}"
+         data-quiz-tier-normal="{{ section.settings.tier_normal_name | default: 'Normal Everyday Activity' | escape }}">
+  <div class="wrap">
+    <div class="quiz-head section-head" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="section-head-title">{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="quiz-sub">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="quiz-card" data-reveal>
+      <div class="quiz-progress" aria-hidden="true">
+        <span class="quiz-progress-bar" data-quiz-progress></span>
+      </div>
+      <p class="quiz-counter" data-quiz-counter aria-live="polite"></p>
+
+      <form class="quiz-form" data-quiz-form novalidate>
+        {%- comment -%} Gelung 4 soalan; pilihan dipecah daripada textarea. {%- endcomment -%}
+        {%- for q in (1..4) -%}
+          {%- assign title_key = 'q' | append: q | append: '_title' -%}
+          {%- assign opts_key = 'q' | append: q | append: '_options' -%}
+          {%- assign help_key = 'q' | append: q | append: '_help' -%}
+
+          <fieldset class="quiz-step{% if q == 1 %} quiz-step--active{% endif %}" data-quiz-step="{{ q }}">
+            <legend class="quiz-q">{{ section.settings[title_key] }}</legend>
+            {%- if section.settings[help_key] != blank -%}
+              <p class="quiz-help">{{ section.settings[help_key] }}</p>
+            {%- endif -%}
+
+            <div class="quiz-opts">
+              {%- assign lines = section.settings[opts_key] | newline_to_br | split: '<br />' -%}
+              {%- for line in lines -%}
+                {%- assign parts = line | split: '|' -%}
+                {%- assign label = parts[0] | strip -%}
+                {%- assign sc = parts[1] | strip -%}
+                {%- if label != blank -%}
+                  <label class="quiz-opt">
+                    <input type="radio" name="q{{ q }}" value="{{ label | escape }}"
+                           data-score="{{ sc | default: '2' }}">
+                    <span class="quiz-opt-mark" aria-hidden="true"></span>
+                    <span class="quiz-opt-text">{{ label }}</span>
+                  </label>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+
+            {%- if q == 3 and section.settings.show_arch_image -%}
+              <figure class="quiz-figure">
+                <img src="{{ 'arch-types-760.jpg' | asset_url }}"
+                     alt="Tiga bentuk tapak kaki — leper, normal dan tinggi"
+                     width="760" height="506" loading="lazy">
+                <figcaption>{{ section.settings.arch_caption }}</figcaption>
+              </figure>
+            {%- endif -%}
+          </fieldset>
+        {%- endfor -%}
+
+        <div class="quiz-nav">
+          <button type="button" class="btn btn--ghost quiz-back" data-quiz-back>{{ section.settings.back_label }}</button>
+          <button type="submit" class="btn btn--primary btn--lg quiz-next" data-quiz-next
+                  data-next-label="{{ section.settings.next_label }}"
+                  data-last-label="{{ section.settings.result_label }}">{{ section.settings.next_label }}</button>
+        </div>
+        <p class="quiz-skip"><a href="{{ section.settings.skip_url | default: '#products' }}">{{ section.settings.skip_label }}</a></p>
+      </form>
+
+      {%- comment -%} ---------- HASIL ---------- {%- endcomment -%}
+      <div class="quiz-result" data-quiz-result hidden>
+        <p class="quiz-result-eyebrow">{{ section.settings.result_eyebrow }}</p>
+        <h3 class="quiz-result-title" data-quiz-result-title></h3>
+        <p class="quiz-result-price" data-quiz-result-price></p>
+        <p class="quiz-result-why" data-quiz-result-why></p>
+
+        <ul class="quiz-answers" data-quiz-answers></ul>
+
+        <div class="quiz-result-cta">
+          <a class="btn btn--primary btn--lg" data-quiz-order href="{{ section.settings.order_url | default: '#order' }}">
+            {{ section.settings.result_cta }}
+          </a>
+          <a class="btn btn--ghost" data-quiz-wa href="#" target="_blank" rel="noopener">
+            {{ section.settings.result_wa_label }}
+          </a>
+        </div>
+        <p class="quiz-result-note">{{ section.settings.result_note }}</p>
+        <button type="button" class="quiz-restart" data-quiz-restart>{{ section.settings.restart_label }}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<noscript>
+  <style>
+    .quiz-section .quiz-step{display:block !important;margin-bottom:var(--s-4)}
+    .quiz-section .quiz-nav,.quiz-section .quiz-progress,.quiz-section .quiz-counter{display:none !important}
+  </style>
+</noscript>
+<script src="{{ 'quiz.js' | asset_url }}" defer></script>
+
+<style>
+  .quiz-section .quiz-sub{max-width:60ch;margin:var(--s-2) 0 0;color:var(--muted);font-size:var(--t-body)}
+  .quiz-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(1.25rem,3vw,2.5rem);max-width:760px;margin:var(--s-5) auto 0;position:relative}
+  .quiz-progress{height:4px;background:var(--light-blue);border-radius:99px;overflow:hidden;margin-bottom:var(--s-2)}
+  .quiz-progress-bar{display:block;height:100%;width:0;background:var(--teal);transition:width .3s ease}
+  .quiz-counter{margin:0 0 var(--s-4);font-size:var(--t-small);color:var(--muted);letter-spacing:.02em}
+
+  .quiz-step{border:0;margin:0;padding:0;display:none}
+  .quiz-step--active{display:block}
+  .quiz-q{font-family:var(--font-display);font-size:var(--t-md);font-weight:700;line-height:1.25;margin:0 0 var(--s-3);padding:0;color:var(--navy)}
+  .quiz-help{font-size:var(--t-small);color:var(--muted);margin:0 0 var(--s-3)}
+
+  .quiz-opts{display:grid;gap:.65rem}
+  .quiz-opt{display:flex;align-items:center;gap:.75rem;border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;cursor:pointer;transition:border-color .18s ease,background .18s ease;background:var(--surface)}
+  .quiz-opt:hover{border-color:var(--teal)}
+  .quiz-opt input{position:absolute;opacity:0;width:0;height:0}
+  .quiz-opt-mark{flex:0 0 auto;width:18px;height:18px;border:2px solid var(--line);border-radius:50%;position:relative;transition:border-color .18s ease}
+  .quiz-opt-mark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--teal);transform:scale(0);transition:transform .16s ease}
+  .quiz-opt-text{font-size:var(--t-body);color:var(--navy);line-height:1.35}
+  .quiz-opt input:checked + .quiz-opt-mark{border-color:var(--teal)}
+  .quiz-opt input:checked + .quiz-opt-mark::after{transform:scale(1)}
+  .quiz-opt input:checked ~ .quiz-opt-text{font-weight:600}
+  .quiz-opt:has(input:checked){border-color:var(--teal);background:var(--light-blue)}
+  .quiz-opt input:focus-visible + .quiz-opt-mark{outline:2px solid var(--teal);outline-offset:3px}
+  .quiz-step--error .quiz-opt{border-color:var(--clay)}
+
+  .quiz-figure{margin:var(--s-3) 0 0}
+  .quiz-figure img{width:100%;height:auto;border-radius:12px;display:block}
+  .quiz-figure figcaption{font-size:var(--t-small);color:var(--muted);margin-top:.5rem}
+
+  .quiz-nav{display:flex;gap:.75rem;align-items:center;margin-top:var(--s-4)}
+  .quiz-nav .quiz-next{margin-left:auto}
+  .quiz-back[hidden]{display:none}
+  .quiz-skip{margin:var(--s-2) 0 0;font-size:var(--t-small)}
+  .quiz-skip a{color:var(--muted)}
+
+  .quiz-result[hidden]{display:none}
+  .quiz-result-eyebrow{font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--teal-deep);margin:0 0 .5rem}
+  .quiz-result-title{font-family:var(--font-display);font-size:var(--t-lg);margin:0 0 .35rem;color:var(--navy);line-height:1.2}
+  .quiz-result-price{font-size:var(--t-md);font-weight:700;color:var(--accent);margin:0 0 var(--s-2)}
+  .quiz-result-why{font-size:var(--t-body);color:var(--navy);margin:0 0 var(--s-3);max-width:58ch}
+  .quiz-answers{list-style:none;padding:0;margin:0 0 var(--s-4);display:grid;gap:.4rem}
+  .quiz-answers li{font-size:var(--t-small);color:var(--muted);padding-left:1.1rem;position:relative}
+  .quiz-answers li::before{content:"";position:absolute;left:0;top:.5em;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  .quiz-result-cta{display:flex;flex-wrap:wrap;gap:.65rem;margin-bottom:var(--s-2)}
+  .quiz-result-note{font-size:var(--t-small);color:var(--muted);margin:0 0 var(--s-2)}
+  .quiz-restart{background:none;border:0;padding:0;font:inherit;font-size:var(--t-small);color:var(--teal-deep);text-decoration:underline;cursor:pointer}
+
+  @media (max-width:640px){
+    .quiz-nav{flex-wrap:wrap}
+    .quiz-nav .quiz-next{width:100%;margin-left:0;order:-1}
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Kuiz keselesaan kaki",
+  "settings": [
+    { "type": "header", "content": "Tajuk" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Kuiz kaki" },
+    { "type": "text", "id": "heading", "label": "Tajuk", "default": "Kaki anda unik. Insole pun patut begitu." },
+    { "type": "textarea", "id": "subheading", "label": "Sub tajuk", "default": "Jawab 4 soalan ringkas — kami cadangkan set yang paling padan dengan kaki anda." },
+
+    { "type": "header", "content": "Soalan 1 — Lokasi tidak selesa" },
+    { "type": "text", "id": "q1_title", "label": "Soalan", "default": "Di bahagian mana anda paling rasa tidak selesa?" },
+    { "type": "textarea", "id": "q1_options", "label": "Pilihan (satu baris: Label | skor)", "default": "Tapak kaki (seluruh) | 2\nTumit | 2\nLengkung kaki | 2\nLutut atau belakang | 3" },
+
+    { "type": "header", "content": "Soalan 2 — Tempoh" },
+    { "type": "text", "id": "q2_title", "label": "Soalan", "default": "Sudah berapa lama anda rasa tidak selesa?" },
+    { "type": "textarea", "id": "q2_options", "label": "Pilihan (satu baris: Label | skor)", "default": "Kurang 3 bulan | 1\n3 hingga 12 bulan | 2\nLebih setahun | 3" },
+
+    { "type": "header", "content": "Soalan 3 — Bentuk tapak kaki" },
+    { "type": "text", "id": "q3_title", "label": "Soalan", "default": "Cuba lihat tapak kaki anda yang basah di lantai. Bentuknya macam mana?" },
+    { "type": "text", "id": "q3_help", "label": "Bantuan", "default": "Guna gambar di bawah untuk bandingkan." },
+    { "type": "textarea", "id": "q3_options", "label": "Pilihan (satu baris: Label | skor)", "default": "Leper — hampir penuh nampak | 3\nNormal — ada lekuk separuh | 1\nTinggi — lekuk sangat dalam | 2\nTidak pasti | 2" },
+    { "type": "checkbox", "id": "show_arch_image", "label": "Tunjuk gambar bentuk tapak kaki", "default": true },
+    { "type": "text", "id": "arch_caption", "label": "Kapsyen gambar", "default": "Tiga jenis bentuk kaki — leper, normal dan tinggi" },
+
+    { "type": "header", "content": "Soalan 4 — Aktiviti harian" },
+    { "type": "text", "id": "q4_title", "label": "Soalan", "default": "Hari biasa anda paling banyak…" },
+    { "type": "textarea", "id": "q4_options", "label": "Pilihan (satu baris: Label | skor)", "default": "Berdiri lama (kerja kedai, kilang) | 3\nJalan jauh | 2\nBersukan atau berlari | 2\nBanyak duduk | 1" },
+
+    { "type": "header", "content": "Navigasi" },
+    { "type": "text", "id": "next_label", "label": "Butang seterusnya", "default": "Seterusnya" },
+    { "type": "text", "id": "back_label", "label": "Butang kembali", "default": "Kembali" },
+    { "type": "text", "id": "result_label", "label": "Butang soalan terakhir", "default": "Lihat syor saya" },
+    { "type": "text", "id": "skip_label", "label": "Pautan langkau", "default": "Saya sudah tahu apa yang saya perlukan — teruskan beli" },
+    { "type": "url", "id": "skip_url", "label": "Pautan langkau" },
+
+    { "type": "header", "content": "Hasil" },
+    { "type": "text", "id": "result_eyebrow", "label": "Eyebrow hasil", "default": "Syor untuk anda" },
+    { "type": "text", "id": "result_cta", "label": "Butang pesanan", "default": "Teruskan ke pesanan" },
+    { "type": "url", "id": "order_url", "label": "Pautan pesanan" },
+    { "type": "text", "id": "result_wa_label", "label": "Butang WhatsApp", "default": "Tanya melalui WhatsApp" },
+    { "type": "textarea", "id": "result_note", "label": "Nota hasil", "default": "Jawapan anda akan dihantar bersama pesanan — pembuat insole kami akan gunakan untuk sesuaikan sokongan." },
+    { "type": "text", "id": "restart_label", "label": "Butang ulang kuiz", "default": "Ulang kuiz" },
+
+    { "type": "header", "content": "Harga, produk & WhatsApp" },
+    { "type": "text", "id": "unit_price", "label": "Harga 1 unit (tanpa RM)", "default": "599" },
+    { "type": "text", "id": "bundle_price", "label": "Harga 2 unit", "default": "1099" },
+    { "type": "text", "id": "tier_active_name", "label": "Produk — sokongan tegas", "default": "On My Feet All Day", "info": "Disyorkan bila aktiviti = berdiri lama / jalan jauh / bersukan." },
+    { "type": "text", "id": "tier_normal_name", "label": "Produk — aktiviti ringan", "default": "Normal Everyday Activity", "info": "Disyorkan bila aktiviti = banyak duduk." },
+    { "type": "text", "id": "wa_number", "label": "Nombor WhatsApp (kosongkan untuk guna tetapan tema)", "default": "" }
+  ],
+  "presets": [{ "name": "Kuiz keselesaan kaki" }]
+}
+{% endschema %}

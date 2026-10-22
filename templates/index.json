@@ -51,6 +51,15 @@
         "stat-3"
       ]
     },
+    "quiz": {
+      "type": "quiz",
+      "settings": {
+        "eyebrow": "Kuiz kaki",
+        "heading": "Kaki anda unik. Insole pun patut begitu.",
+        "subheading": "Jawab 4 soalan ringkas — kami cadangkan pakej yang paling padan dengan kaki anda.",
+        "order_url": "#order"
+      }
+    },
     "marquee": {
       "type": "marquee",
       "settings": {
@@ -519,6 +528,7 @@
   },
   "order": [
     "hero",
+    "quiz",
     "marquee",
     "kenapa",
     "products",
