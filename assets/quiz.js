@@ -231,6 +231,28 @@
 
     if (backBtn) backBtn.addEventListener('click', function () { show(index - 1); });
 
+    // Pautan pesanan: "#order" tak semestinya wujud — tema guna id "order-<section.id>".
+    // Selesaikan: cuba anchor, jika tiada cari borang produk sebenar (.order-form).
+    if (orderLink) {
+      orderLink.addEventListener('click', function (ev) {
+        var href = orderLink.getAttribute('href') || '';
+        if (href.charAt(0) !== '#') return; // pautan penuh — biar navigasi biasa
+
+        var target = null;
+        try { target = document.querySelector(href); } catch (e) { target = null; }
+        if (!target) {
+          var formEl = document.querySelector('.order-form');
+          target = formEl ? (formEl.closest('section') || formEl) : null;
+        }
+        if (target) {
+          ev.preventDefault();
+          try { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { target.scrollIntoView(); }
+          target.setAttribute('tabindex', '-1');
+          try { target.focus({ preventScroll: true }); } catch (e) {}
+        }
+      });
+    }
+
     if (restartBtn) {
       restartBtn.addEventListener('click', function () {
         if (form) form.reset();
