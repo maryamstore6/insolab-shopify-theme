@@ -115,11 +115,226 @@
         "image_alt": "Tiga jenis bentuk kaki — normal, flat dan high arch",
         "caption": "Normal, flat atau high arch — setiap bentuk perlukan sokongan yang berbeza."
       }
+    },
+    "products_kUhRpf": {
+      "type": "products",
+      "blocks": {
+        "fallback_xhFhhF": {
+          "type": "fallback",
+          "settings": {
+            "name": "On My Feet All Day",
+            "badge": "Aktiviti Berat",
+            "description": "Untuk yang berdiri atau berjalan 4+ jam sehari. Sokongan lebih tegas.",
+            "price": "RM599",
+            "link": "",
+            "fallback_art": "insole-support.svg"
+          }
+        },
+        "fallback_e773nc": {
+          "type": "fallback",
+          "settings": {
+            "name": "Normal Everyday Activity",
+            "badge": "",
+            "description": "Untuk aktiviti harian 1–4 jam. Lebih ringan dan semula jadi.",
+            "price": "RM599",
+            "link": "",
+            "fallback_art": "insole-everyday.svg"
+          }
+        }
+      },
+      "block_order": [
+        "fallback_xhFhhF",
+        "fallback_e773nc"
+      ],
+      "name": "Produk",
+      "settings": {
+        "eyebrow": "Produk",
+        "heading": "Dua pilihan. Dua cara hidup.",
+        "collection": "",
+        "limit": 4,
+        "cta_label": "Order",
+        "badge_tag": "heavy",
+        "badge_text": "Aktiviti Berat",
+        "bundle_heading": "Ambil dua, jimat RM99.",
+        "bundle_body": "Untuk anda dan pasangan.",
+        "bundle_cta": "Order 2 Unit",
+        "bundle_url": ""
+      }
+    },
+    "split_video_h4VrdX": {
+      "type": "split-video",
+      "name": "Split (video + teks)",
+      "settings": {
+        "eyebrow": "100% Dari Rumah",
+        "heading": "Tiada temujanji. Tiada menunggu. Tiada ke mana-mana.",
+        "body": "Kami pos impression kit ke rumah anda. Tekan kaki ke foam tray ikut panduan bergambar — 5 minit sahaja. Hantar balik guna airway bill kami. Postage kami tanggung.",
+        "cta_label": "Soalan Lazim",
+        "cta_url": "",
+        "flip": false,
+        "video_url": "",
+        "bundled_video": "guide",
+        "video_alt": "Teknik menekan kaki ke foam tray untuk mengambil bentuk kaki"
+      }
+    },
+    "split_video_CHyrf9": {
+      "type": "split-video",
+      "name": "Split (video + teks)",
+      "settings": {
+        "eyebrow": "100% Dari Rumah",
+        "heading": "Tiada temujanji. Tiada menunggu. Tiada ke mana-mana.",
+        "body": "Kami pos impression kit ke rumah anda. Tekan kaki ke foam tray ikut panduan bergambar — 5 minit sahaja. Hantar balik guna airway bill kami. Postage kami tanggung.",
+        "cta_label": "Soalan Lazim",
+        "cta_url": "",
+        "flip": true,
+        "video_url": "",
+        "bundled_video": "adult",
+        "video_alt": "Teknik menekan kaki ke foam tray untuk mengambil bentuk kaki"
+      }
+    },
+    "process_AtHVJH": {
+      "type": "process",
+      "blocks": {
+        "step_kahmAz": {
+          "type": "step",
+          "settings": {
+            "name": "Order",
+            "description": "Pilih produk, buat pesanan. Kami WhatsApp untuk pengesahan bayaran.",
+            "time": "",
+            "icon": "process-01-order.svg"
+          }
+        },
+        "step_G6LffX": {
+          "type": "step",
+          "settings": {
+            "name": "Impression Kit",
+            "description": "Kit sampai ke rumah — foam tray dan panduan bergambar.",
+            "time": "2–3 hari kerja",
+            "icon": "process-02-kit.svg"
+          }
+        },
+        "step_EEM64G": {
+          "type": "step",
+          "settings": {
+            "name": "Imprint",
+            "description": "Tekan kaki ke foam tray. Lebih kurang 5 minit.",
+            "time": "",
+            "icon": "process-03-imprint.svg"
+          }
+        },
+        "step_GRLAUj": {
+          "type": "step",
+          "settings": {
+            "name": "Hantar Balik",
+            "description": "Guna airway bill prabayar kami. Tiada kos.",
+            "time": "Postage percuma",
+            "icon": "process-04-return.svg"
+          }
+        },
+        "step_EEgVWM": {
+          "type": "step",
+          "settings": {
+            "name": "Kami Hasilkan",
+            "description": "Kami hasilkan insole ikut bentuk kaki anda.",
+            "time": "12–18 hari kerja",
+            "icon": "process-05-make.svg"
+          }
+        },
+        "step_JD9A7h": {
+          "type": "step",
+          "settings": {
+            "name": "Sampai Ke Rumah",
+            "description": "Insole sampai ke rumah. Kami maklumkan bila ia dihantar.",
+            "time": "Seluruh Malaysia",
+            "icon": "process-06-delivery.svg"
+          }
+        }
+      },
+      "block_order": [
+        "step_kahmAz",
+        "step_G6LffX",
+        "step_EEM64G",
+        "step_GRLAUj",
+        "step_EEgVWM",
+        "step_JD9A7h"
+      ],
+      "name": "Proses",
+      "settings": {
+        "eyebrow": "Proses",
+        "heading": "Enam langkah. Satu insole.",
+        "image_alt": "Enam langkah proses InsoLab",
+        "caption": "Daripada acuan kaki hingga insole siap — semua di bengkel kami.",
+        "show_fallback": true
+      }
+    },
+    "testimonials_TxnDMj": {
+      "type": "testimonials",
+      "blocks": {
+        "quote_j6RTzG": {
+          "type": "quote",
+          "settings": {
+            "quote": "Kerja saya berdiri 8 jam sehari. Lepas pakai ni, kaki tak penat macam dulu.",
+            "name": "Ahmad R.",
+            "product": "On My Feet All Day"
+          }
+        },
+        "quote_dGPRP3": {
+          "type": "quote",
+          "settings": {
+            "quote": "Prosesnya senang. Buat imprint di rumah, hantar balik. Tak perlu pergi mana-mana.",
+            "name": "Siti N.",
+            "product": "Normal Everyday Activity"
+          }
+        },
+        "quote_TmRt4p": {
+          "type": "quote",
+          "settings": {
+            "quote": "Ambil 2 unit untuk saya dan suami. Harga berbaloi, selesa dipakai.",
+            "name": "Lim W.",
+            "product": "2 Unit Package"
+          }
+        }
+      },
+      "block_order": [
+        "quote_j6RTzG",
+        "quote_dGPRP3",
+        "quote_TmRt4p"
+      ],
+      "name": "Testimoni",
+      "settings": {
+        "eyebrow": "Pengalaman",
+        "heading": "Apa kata mereka."
+      }
+    },
+    "guarantee_FdWGGA": {
+      "type": "guarantee",
+      "name": "Jaminan",
+      "settings": {
+        "pill": "100 Hari Jaminan",
+        "heading": "Tak puas hati? Kami baiki.",
+        "body": "Dalam 100 hari pertama, kalau anda tak puas hati, kami baiki atau ubah suai insole anda secara percuma."
+      }
+    },
+    "cta_xbN8nf": {
+      "type": "cta",
+      "name": "CTA akhir",
+      "settings": {
+        "heading": "Sedia untuk lebih selesa?",
+        "body": "Order hari ini. Impression kit sampai dalam 2–3 hari kerja.",
+        "cta_label": "Order Sekarang",
+        "cta_url": ""
+      }
     }
   },
   "order": [
     "hero",
     "marquee_UEpWqh",
-    "kenapa_idQQqV"
+    "kenapa_idQQqV",
+    "products_kUhRpf",
+    "split_video_h4VrdX",
+    "split_video_CHyrf9",
+    "process_AtHVJH",
+    "testimonials_TxnDMj",
+    "guarantee_FdWGGA",
+    "cta_xbN8nf"
   ]
 }
