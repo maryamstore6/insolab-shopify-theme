@@ -102,10 +102,24 @@
       "settings": {
         "items": "Impression Kit Percuma, Return Postage Ditanggung, Dibuat Khas Untuk Anda, 100 Hari Jaminan, Seluruh Malaysia"
       }
+    },
+    "kenapa_idQQqV": {
+      "type": "kenapa",
+      "name": "Kenapa InsoLab",
+      "settings": {
+        "eyebrow": "Kenapa InsoLab",
+        "heading": "Setiap kaki itu berbeza.",
+        "body": "Tiada dua kaki yang sama. Lengkok, lebar dan cara anda menapak — semuanya berbeza antara satu orang dengan yang lain. Insole yang sesuai untuk orang lain belum tentu sesuai untuk anda. Sebab itu acuan kaki anda sendiri yang jadi panduan kami.",
+        "cta_label": "Lihat Produk",
+        "cta_url": "",
+        "image_alt": "Tiga jenis bentuk kaki — normal, flat dan high arch",
+        "caption": "Normal, flat atau high arch — setiap bentuk perlukan sokongan yang berbeza."
+      }
     }
   },
   "order": [
     "hero",
-    "marquee_UEpWqh"
+    "marquee_UEpWqh",
+    "kenapa_idQQqV"
   ]
 }
